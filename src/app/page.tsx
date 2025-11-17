@@ -1,18 +1,18 @@
-import Navigation from "@/components/Navigation";
-import Hero from "@/components/Hero";
-import ExploreSection from "@/components/ExploreSection";
-import Events from "@/components/Events";
-import Courses from "@/components/Courses";
-import CTASection from "@/components/CTASection";
-import FAQ from "@/components/FAQ";
-import ContactForm from "@/components/ContactForm";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
-import Footer from "@/components/Footer";
-import SEO from "@/components/SEO";
-import { useHeroImagePreload } from "@/hooks/useImagePreload";
+import Navigation from "@/components/oldComponent/Navigation";
+import Hero from "@/components/oldComponent/Hero";
+import ExploreSection from "@/components/oldComponent/ExploreSection";
+import Events from "@/components/oldComponent/Events";
+import Courses from "@/components/oldComponent/Courses";
+import CTASection from "@/components/oldComponent/CTASection";
+import FAQ from "@/components/oldComponent/FAQ";
+import ContactForm from "@/components/oldComponent/ContactForm";
+import WhatsAppFloat from "@/components/oldComponent/WhatsAppFloat";
+import Footer from "@/components/oldComponent/Footer";
+import SEO from "@/components/oldComponent/SEO";
+// import { useHeroImagePreload } from "@/hooks/useImagePreload";111
 const Index = () => {
   // Preload critical hero images
-  useHeroImagePreload();
+  // useHeroImagePreload();111
   return <div className="min-h-screen">
       <SEO title="Ravi Rautela Mentorship Hub | Tech Education & Career Growth" description="Transform your tech career with expert mentorship, hands-on projects, and real-world internships. Join our community of learners and innovators." keywords="tech mentorship, programming courses, internships, hackathons, career development, coding bootcamp, tech education" />
       <Navigation />
