@@ -6,10 +6,12 @@ import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"], 
 });
 
 export const metadata: Metadata = {
@@ -28,7 +30,9 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html lang="en">
         <body className={inter.className}>
-            {children} <Toaster />
+          <Navbar/>
+          {children} <Toaster />
+          <Footer/>
         </body>
       </html>
     </SessionProvider>
