@@ -158,7 +158,7 @@ const getNutStyle = (domainId: string) => {
   return nutStyles[domainId as keyof typeof nutStyles] || nutStyles.ai;
 };
 
-export const DomainNode = ({ 
+export const              DomainNode = ({ 
   domain, 
   isSelected, 
   isHidden, 
@@ -256,7 +256,7 @@ export const DomainNode = ({
             }}
           />
 
-          {/* Optimized sparkle particles - reduced for mobile performance */}
+          {/* Optimized sparkle particles - reduced for mobile performance
           <motion.div className="absolute inset-0 pointer-events-none hidden md:block">
             {[...Array(3)].map((_, i) => (
               <motion.div
@@ -281,7 +281,7 @@ export const DomainNode = ({
                 ✨
               </motion.div>
             ))}
-          </motion.div>
+          </motion.div> */}
 
           {/* Optimized orbiting leaves - fewer for performance */}
           <motion.div
@@ -293,7 +293,7 @@ export const DomainNode = ({
               ease: "linear",
             }}
           >
-            {[...Array(4)].map((_, i) => (
+            {[...Array(3)].map((_, i) => (
               <motion.div
                 key={`orbit-leaf-${i}`}
                 className="absolute text-lg"
@@ -382,7 +382,7 @@ export const DomainNode = ({
               } : {}}
             >
               {/* Sprout Image removed */}
-            </motion.div>
+            </motion.div> 
 
             {/* Domain info below the seed */}
             <motion.div 
