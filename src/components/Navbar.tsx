@@ -14,32 +14,33 @@ const UserNavbar = () => {
   const user = session?.user;
 
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
+    <nav className="bg-white py-1 shadow-sm sticky top-0 z-50 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="py-4">
             <Link href="/">
               <div className="flex items-center space-x-1 cursor-pointer">
-                <span className="tracking-widest text-lg md:text-lg font-medium text-gray-700">
+                {/* <span className="tracking-widest text-lg md:text-lg font-medium text-gray-700">
                   FRACTIONAL
                 </span>
                 <div className="bg-[#CFE4D1] rounded-md px-2 py-1 flex items-center justify-center">
                   <span className="text-gray-700 text-lg md:text-lg font-semibold">
                     CXO
                   </span>
-                </div>
+                </div> */}
+                  <Image src="/mentor-ravi-logo.png" alt="logo" height={150} width={150}></Image>
               </div>
-            </Link>
+            </Link>   
           </div>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center space-x-6">
-            {["expertise", "pricing", "demo", "contact", "FAQs"].map((section) => (
+          <div className="hidden md:flex items-center space-x-6 gap-5">
+            {["Events", "Learning Path", "internships", "More" ].map((section) => (
               <a
                 key={section}
                 href={`#${section}`}
-                className="text-gray-600 hover:text-green-700 text-sm font-medium"
+                className="text-gray-600 hover:text-[#6347EB] text-md font-medium"
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </a>
@@ -63,7 +64,7 @@ const UserNavbar = () => {
                       className="rounded-full border"
                     />
                   ) : (
-                    <div className="w-9 h-9 flex items-center justify-center rounded-full bg-green-700 text-white text-sm font-semibold">
+                    <div className="w-9 h-9 flex items-center justify-center rounded-full bg-[#6347EB] text-white text-sm font-semibold">
                       {user.name?.charAt(0).toUpperCase()}
                     </div>
                   )}
@@ -93,13 +94,13 @@ const UserNavbar = () => {
                 <Link href="/auth/login">
                   <Button
                     variant="outline"
-                    className="border-green-700 text-green-700 hover:bg-green-700 hover:text-white text-sm"
+                    className="border-[#6347EB] text-[#6347EB] hover:bg-[#6347EB] hover:text-white text-sm"
                   >
                     Sign In
                   </Button>
                 </Link>
                 <Link href="/auth/register">
-                  <Button className="bg-green-800 hover:bg-green-900 text-white text-sm">
+                  <Button className="bg-[#6347EB] hover:bg-[#1c2787] text-white text-sm">
                     Get Started
                   </Button>
                 </Link>
@@ -111,7 +112,7 @@ const UserNavbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-green-700 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-[#6347EB] focus:outline-none"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -123,11 +124,11 @@ const UserNavbar = () => {
       {isOpen && (
         <div className="md:hidden bg-white pb-3 px-4 z-50 absolute top-16 left-0 w-full shadow-lg">
           <div className="flex flex-col space-y-2 pt-2">
-            {["expertise", "pricing", "demo", "contact", "faqs"].map((section) => (
+            {["Events", "Learning Path", "internships", "More" ].map((section) => (
               <a
                 key={section}
                 href={`#${section}`}
-                className="text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-base font-medium"
+                className="text-gray-600 hover:text-[#6347EB] px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsOpen(false)}
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
@@ -147,7 +148,7 @@ const UserNavbar = () => {
                         className="rounded-full border"
                       />
                     ) : (
-                      <div className="w-8 h-8 flex items-center justify-center rounded-full bg-green-700 text-white text-sm font-semibold">
+                      <div className="w-8 h-8 flex items-center justify-center rounded-full bg-[#6347EB] text-white text-sm font-semibold">
                         {user.name?.charAt(0).toUpperCase()}
                       </div>
                     )}
@@ -169,7 +170,7 @@ const UserNavbar = () => {
                   <Link href="/auth/login">
                     <Button
                       variant="outline"
-                      className="w-full border-green-700 text-green-700 hover:bg-green-700 hover:text-white mb-2"
+                      className="w-full border-[#6347EB] text-[#6347EB] hover:bg-[#6347EB] hover:text-white mb-2"
                       onClick={() => setIsOpen(false)}
                     >
                       Sign In
@@ -177,7 +178,7 @@ const UserNavbar = () => {
                   </Link>
                   <Link href="/auth/register">
                     <Button
-                      className="w-full bg-green-700 hover:bg-green-800 text-white"
+                      className="w-full bg-[#6347EB] hover:bg-[#2a146b] text-white"
                       onClick={() => setIsOpen(false)}
                     >
                       Get Started
