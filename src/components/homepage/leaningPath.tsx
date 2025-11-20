@@ -269,16 +269,7 @@ export default function ExploreSection() {
           transition={{ duration: 0.6, delay: 1.5 }}
           className="flex justify-center mt-16"
         >
-          <Link
-            href="/learning-path"
-            className="group inline-flex items-center gap-2 text-lg font-semibold text-primary hover:text-primary/80 transition-all duration-300"
-          >
-            <span className="relative py-0 my-[55px]">
-              Explore More
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-            </span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-          </Link>
+          
         </motion.div>
       </div>
     </section>
