@@ -2,7 +2,7 @@ import MentorshipHero from '@/components/homepage/Hero'
 import Engagement  from '@/components/homepage/Engagement'
 import React from 'react'
 import LearningPathPage from '@/components/homepage/leaningPath'
-import InternshipOpportunities from '@/components/homepage/InternShip'
+import InternshipOpportunities from '@/components/homepage/Internship'
 import Faq from '@/components/homepage/Faq'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
@@ -27,7 +27,8 @@ const Homepage = () => {
           </div>
       </div>
       <Engagement/>
-        <div className="text-center mb-12">
+      <div className='flex flex-col py-40'>
+        <div className="text-center mb-20">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Internship Opportunities
           </h1>
@@ -35,7 +36,8 @@ const Homepage = () => {
             Gain hands-on experience with real-world projects and expert mentorship
           </p>
         </div>
-      <InternshipOpportunities/>
+            <InternshipOpportunities/>
+      </div>
       <Faq/>
     </div>
   )

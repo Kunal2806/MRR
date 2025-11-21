@@ -9,14 +9,15 @@ import {
   FolderKanban, 
   Trophy, 
   Heart, 
-  FlaskConical 
+  FlaskConical ,
+  LucideIcon
 } from 'lucide-react';
 
 interface Engagement {
   id: string;
   title: string;
   description: string;
-  icon: any;
+  icon: LucideIcon;
   bgColor: string;
   hoverBgColor: string;
 }

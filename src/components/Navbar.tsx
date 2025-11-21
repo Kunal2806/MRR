@@ -124,17 +124,15 @@ const UserNavbar = () => {
       {isOpen && (
         <div className="md:hidden bg-white pb-3 px-4 z-50 absolute top-16 left-0 w-full shadow-lg">
           <div className="flex flex-col space-y-2 pt-2">
-            {["Events", "Learning Path", "internships", "More" ].map((section) => (
+            {["home","events", "learning-path", "internships", "more" ].map((section) => (
               <a
                 key={section}
-                href={`#${section}`}
-                className="text-gray-600 hover:text-[#6347EB] px-3 py-2 rounded-md text-base font-medium"
-                onClick={() => setIsOpen(false)}
+                href={section=="home"? "/"  :`/${section}`}
+                className="text-gray-600 hover:text-[#6347EB] text-md font-medium"
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </a>
             ))}
-
             <div className="pt-2 border-t border-gray-200">
               {user ? (
                 <>

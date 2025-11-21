@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react';
-import { Search, MapPin, Calendar } from 'lucide-react';
+import Image from "next/image"
+import { Search, MapPin } from 'lucide-react';
 
 interface Event {
   id: string;
@@ -152,9 +153,16 @@ export default function EventsPage() {
 
               {/* Image Section */}
               <div className="w-48 relative">
-                <img
+                {/* <img
                   src={event.image}
                   alt={event.title}
+                  className="w-full h-full object-cover"
+                /> */}
+                <Image
+                  src={event.image}
+                  alt={event.title}
+                  width={192}
+                  height={128}
                   className="w-full h-full object-cover"
                 />
               </div>

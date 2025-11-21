@@ -108,7 +108,7 @@ export default function FAQContactPage() {
             </div>
             
             <h2 className="text-3xl md:text-4xl font-bold text-indigo-600 text-center mb-3">
-              Let's Connect
+              Let&apos;s Connect
             </h2>
             
             <p className="text-gray-600 text-center mb-8 text-sm md:text-base px-4">

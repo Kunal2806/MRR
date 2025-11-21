@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Document Management System",
+  title: "Ravi Rautela Mentorship Hub",
   description: "We're here to Increase your Productivity",
 };
 
