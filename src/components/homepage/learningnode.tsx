@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Domain } from "@/data/domains";
 // import { Link } from "react-router-dom";
-import { Sparkles } from "lucide-react";
-import sproutImage from "@/assets/sprout-seed.png";
+// import { Sparkles } from "lucide-react";
+// import sproutImage from "@/assets/sprout-seed.png";
 import { useIsMobile } from "@/hooks/use-mobile";
 interface DomainNodeProps {
   domain: Domain;

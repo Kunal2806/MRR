@@ -112,7 +112,7 @@ const handlePrintToPDF = useCallback(() => {
 }, [data?.hospitalName]);
 
   useEffect(() => {
-    const fetchProjectData = async () => {
+    const Data = async () => {
       try {
         const response = await fetch(`/api/projects?id=${params.id}`);
         if (!response.ok) throw new Error('Failed to fetch projects');
@@ -141,7 +141,7 @@ const handlePrintToPDF = useCallback(() => {
       }
     };
 
-    fetchProjectData();
+    Data();
   }, [params.id]);
 
   const renderContent = (content: string, heading: string) => {

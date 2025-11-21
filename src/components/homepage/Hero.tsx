@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React from 'react';
 import { ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 
@@ -12,7 +12,7 @@ export default function MentorshipHero() {
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
           <span className="text-gray-800">Welcome to </span>
           <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 bg-clip-text text-transparent">
-            Ravi Rautela<span className='text-[#F97A1F]'>'s</span>
+            Ravi Rautela<span className='text-[#F97A1F]'>&apos;s</span>
           </span>
           <br />
           <span className="text-gray-800">Mentorship Hub</span>
