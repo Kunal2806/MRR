@@ -12,7 +12,7 @@
 "use client"
 import React, { useState } from 'react';
 import { Search, Home, Briefcase, Settings, Monitor, BarChart3, TrendingUp, ClipboardList, GraduationCap, ChevronRight } from 'lucide-react';
-import InternshipOpportunities from '@/components/homepage/Internship'
+import InternshipOpportunities from '@/components/homepage/Internship';
 
 interface CategoryButtonProps {
   icon: React.ReactNode;
