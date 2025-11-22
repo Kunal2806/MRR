@@ -103,7 +103,11 @@ export default function InternshipOpportunities() {
               }}
             >
            <div className="mb-4">
-             <span className="inline-flex items-center gap-1.5 bg-indigo-600 text-white text-xs font-medium px-3 py-1.5 rounded-full">
+             <span className="inline-flex items-center gap-1.5 text-white text-xs font-medium px-3 py-1.5 rounded-full"
+              style={{
+                backgroundColor: internship.borderColor
+              }}
+             >
                <Building2 size={12} />
                 Ravi Rautela Mentorship Hub
              </span>
@@ -127,13 +131,21 @@ export default function InternshipOpportunities() {
                       {internship.timeline}
                  </span>
              </div>
-             <span className="bg-indigo-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+             <span className="text-white text-xs font-semibold px-3 py-1 rounded-full"
+              style={{
+                backgroundColor: internship.borderColor
+              }}
+             >
     {/* //           Open */}
                   {internship.status}
              </span>
            </div>
            <Link href={`/internships/${internship.id}`}>
-             <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+             <button className="w-full text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+              style={{
+                backgroundColor: internship.borderColor
+              }}
+             >
                I am Interested
                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                  <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
