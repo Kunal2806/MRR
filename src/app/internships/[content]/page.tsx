@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, Clock, ArrowLeft, CheckCircle, Sparkles, Target } from 'lucide-react';
+import Link from 'next/link';
 
 export default function JobPosting() {
   const skills = [
@@ -24,7 +25,9 @@ export default function JobPosting() {
         {/* Back Button */}
         <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors text-sm">
           <ArrowLeft size={16} />
-          <span>Back to Careers</span>
+          <Link href="/internships">
+            <span>Back to Careers</span>
+          </Link>
         </button>
 
         {/* Header Section */}

@@ -1,0 +1,235 @@
+export type Status = "open" | "close" | "upcoming";
+
+export interface Internship {
+  id: string;
+  domain: string;
+  status: Status;
+  bgColor: string;
+  borderColor: string;
+  overview: string;
+  tasks: {
+    id: string;
+    title: string;
+    description: string;
+    status: Status;
+    bgColor: string;
+    borderColor: string;
+    links?: string[];
+  }[];
+  technologyStack: string[];
+  submissionProcess: string[];
+  timeline: string;
+  criteria: { name: string; weightage: string }[];
+  interviewCall: string;
+}
+
+export const internships: Internship[] = [
+  {
+    id: "INT-MERN",
+    domain: "MERN Full Stack",
+    status: "open",
+    bgColor: "bg-green-50",
+    borderColor: "border-green-500",
+    overview:
+      "Students must complete one task in 5 days. This will be used for shortlisting candidates.",
+    tasks: [
+      {
+        id: "TASK-M1",
+        title: "Temple Tourism Website",
+        description:
+          "Create an informative tourism website showcasing temples across India.",
+        status: "open",
+        bgColor: "bg-amber-50",
+        borderColor: "border-amber-500"
+      },
+      {
+        id: "TASK-M2",
+        title: "Hospital Management System",
+        description:
+          "Build a patient, staff, and billing management system with modular dashboards.",
+        status: "open",
+        bgColor: "bg-blue-50",
+        borderColor: "border-blue-500"
+      },
+      {
+        id: "TASK-M3",
+        title: "Custom Jacket Design Website",
+        description:
+          "Users can design jackets with live preview and customization.",
+        status: "upcoming",
+        bgColor: "bg-purple-50",
+        borderColor: "border-purple-500",
+        links: ["https://varsitybase.com"]
+      },
+      {
+        id: "TASK-M4",
+        title: "NGO Training & Skill Website",
+        description:
+          "Create a modern website for NGO program details, volunteer signup, and donations.",
+        status: "open",
+        bgColor: "bg-orange-50",
+        borderColor: "border-orange-600",
+        links: ["https://edunetfoundation.org"]
+      },
+      {
+        id: "TASK-M5",
+        title: "Government Skill Portal",
+        description:
+          "A skill development portal for students including login and course recommendations.",
+        status: "close",
+        bgColor: "bg-red-50",
+        borderColor: "border-red-500",
+        links: ["https://www.naanmudhalvan.tn.gov.in"]
+      }
+    ],
+    technologyStack: [
+      "MERN Stack",
+      "HTML/CSS/JS/PHP",
+      "GitHub CI/CD",
+      "Vercel/Netlify Deployment"
+    ],
+    submissionProcess: [
+      "Upload project to GitHub",
+      "Deploy on Vercel/Netlify",
+      "Submit live link + repository link",
+      "Submit short PDF explaining features & learning"
+    ],
+    timeline: "5 days",
+    criteria: [
+      { name: "Innovation & Learning", weightage: "30%" },
+      { name: "Timely Completion", weightage: "50%" },
+      { name: "Extra Features", weightage: "20%" }
+    ],
+    interviewCall: "Shortlisted candidates will be invited for online interview."
+  },
+  {
+    id: "INT-GWS",
+    domain: "Google Workspace",
+    status: "open",
+    bgColor: "bg-red-50",
+    borderColor: "border-red-200",
+    overview:
+      "Students must build a Google AI-powered project in 5 days.",
+    tasks: [
+      {
+        id: "TASK-G1",
+        title: "Gemini Study Path Generator",
+        description:
+          "Generate study plans using Gemini API based on student performance.",
+        status: "open",
+        bgColor: "bg-pink-50",
+        borderColor: "border-pink-500"
+      },
+      {
+        id: "TASK-G2",
+        title: "Assignment Management System",
+        description:
+          "Faculty can create assignments and students can submit digitally.",
+        status: "open",
+        bgColor: "bg-yellow-50",
+        borderColor: "border-yellow-500"
+      },
+      {
+        id: "TASK-G3",
+        title: "Exam Proctoring AI System",
+        description:
+          "AI verifies identity and detects cheating using camera/video.",
+        status: "upcoming",
+        bgColor: "bg-indigo-50",
+        borderColor: "border-indigo-500"
+      },
+      {
+        id: "TASK-G4",
+        title: "AI Code Review Assistant",
+        description:
+          "Gemini analyzes code, detects bugs, and suggests improvements.",
+        status: "close",
+        bgColor: "bg-red-50",
+        borderColor: "border-red-500"
+      }
+    ],
+    technologyStack: [
+      "Google Workspace API",
+      "Frontend + Backend",
+      "GitHub CI/CD",
+      "Vercel Deployment"
+    ],
+    submissionProcess: [
+      "Push code to GitHub",
+      "Deploy live",
+      "Submit PDF + links"
+    ],
+    timeline: "5 days",
+    criteria: [
+      { name: "Innovation", weightage: "30%" },
+      { name: "Completion", weightage: "50%" },
+      { name: "Quality", weightage: "20%" }
+    ],
+    interviewCall: "Selected students will get interview invite."
+  },
+  {
+    id: "INT-AIML",
+    domain: "AI / ML",
+    status: "upcoming",
+    bgColor: "bg-rose-200",
+    borderColor: "border-rose-500",
+    overview:
+      "Build an AI/ML-powered project using real or synthetic datasets.",
+    tasks: [
+      {
+        id: "TASK-A1",
+        title: "Career Recommendation AI",
+        description:
+          "Suggests career paths based on skills, interests, and personality.",
+        status: "open",
+        bgColor: "bg-green-50",
+        borderColor: "border-green-600"
+      },
+      {
+        id: "TASK-A2",
+        title: "Job Market Trend Analyzer",
+        description:
+          "Analyze future jobs demand and skill gap using datasets.",
+        status: "open",
+        bgColor: "bg-blue-50",
+        borderColor: "border-blue-600"
+      },
+      {
+        id: "TASK-A3",
+        title: "Resume Screening AI",
+        description:
+          "Extracts resume content and suggests job match score.",
+        status: "open",
+        bgColor: "bg-yellow-50",
+        borderColor: "border-yellow-600"
+      },
+      {
+        id: "TASK-A4",
+        title: "Student Performance Predictor",
+        description:
+          "Predicts academic performance using ML model.",
+        status: "close",
+        bgColor: "bg-red-50",
+        borderColor: "border-red-600"
+      }
+    ],
+    technologyStack: [
+      "Python",
+      "Scikit-learn / TensorFlow",
+      "Flask / FastAPI / Streamlit",
+      "Dataset-based modeling"
+    ],
+    submissionProcess: [
+      "Upload code",
+      "Deploy model",
+      "Submit report and links"
+    ],
+    timeline: "5 days",
+    criteria: [
+      { name: "Innovation", weightage: "30%" },
+      { name: "Completion", weightage: "50%" },
+      { name: "ML Accuracy & Features", weightage: "20%" }
+    ],
+    interviewCall: "Shortlisted candidates will be notified."
+  }
+];
