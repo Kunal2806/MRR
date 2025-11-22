@@ -26,7 +26,6 @@ const Homepage = () => {
           </Link>
           </div>
       </div>
-      <Engagement/>
       <div className='flex flex-col py-40'>
         <div className="text-center mb-20">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -38,6 +37,7 @@ const Homepage = () => {
         </div>
             <InternshipOpportunities/>
       </div>
+      <Engagement/>
       <Faq/>
     </div>
   )
