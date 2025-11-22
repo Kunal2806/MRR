@@ -1,6 +1,7 @@
 "use client"
 import React from 'react';
 import {Calendar, Building2 } from 'lucide-react';
+import Link from 'next/link';
 
 interface InternshipCardProps {
   title: string;
@@ -8,6 +9,7 @@ interface InternshipCardProps {
   duration: string;
   bgColor: string;
   borderColor: string;
+  id: string;
 }
 
 
@@ -17,6 +19,7 @@ const InternshipCard: React.FC<InternshipCardProps> = ({
   duration,
   bgColor,
   borderColor,
+  id,
 }) => {
   return (
     <div className={`${bgColor} ${borderColor} border-2 rounded-2xl p-6 flex flex-col h-full shadow-sm hover:shadow-md transition-shadow`}>
@@ -44,13 +47,14 @@ const InternshipCard: React.FC<InternshipCardProps> = ({
           Open
         </span>
       </div>
-      
-      <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
-        I am Interested
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </button>
+      <Link href={`/internships/${id}`}>
+        <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+          I am Interested
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+      </Link>
     </div>
   );
 };
@@ -63,6 +67,7 @@ export default function InternshipOpportunities() {
       duration: '3-6 Months',
       bgColor: 'bg-blue-50',
       borderColor: 'border-blue-100',
+      id: '1'
     },
     {
       title: 'Full Stack Intern',
@@ -70,6 +75,7 @@ export default function InternshipOpportunities() {
       duration: '3-6 Months',
       bgColor: 'bg-pink-50',
       borderColor: 'border-pink-100',
+      id: '2'
     },
     {
       title: 'Google Workspace Intern',
@@ -77,6 +83,7 @@ export default function InternshipOpportunities() {
       duration: '3 Months',
       bgColor: 'bg-cyan-50',
       borderColor: 'border-cyan-100',
+      id: '3'
     },
   ];
 
@@ -85,7 +92,7 @@ export default function InternshipOpportunities() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {internships.map((internship, index) => (
-            <InternshipCard key={index} {...internship} />
+            <InternshipCard key={index} {...internship}/>
           ))}
         </div>
       </div>
