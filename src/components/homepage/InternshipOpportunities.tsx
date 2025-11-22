@@ -96,7 +96,11 @@ export default function InternshipOpportunities() {
             // <InternshipCard key={index} {...internship}/>
             <div
               key={index}
-              className={`${internship.bgColor} ${internship.borderColor} border-2 border-solid rounded-2xl p-6 flex flex-col h-full shadow-sm hover:shadow-md transition-shadow`}
+              className={`border-2 border-solid rounded-2xl p-6 flex flex-col h-full shadow-sm hover:shadow-md transition-shadow `}
+              style={{
+                backgroundColor: internship.bgColor,
+                borderColor: internship.borderColor
+              }}
             >
            <div className="mb-4">
              <span className="inline-flex items-center gap-1.5 bg-indigo-600 text-white text-xs font-medium px-3 py-1.5 rounded-full">

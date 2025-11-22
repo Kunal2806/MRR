@@ -12,8 +12,6 @@ export interface Internship {
     title: string;
     description: string;
     status: Status;
-    bgColor: string;
-    borderColor: string;
     links?: string[];
   }[];
   technologyStack: string[];
@@ -28,8 +26,8 @@ export const internships: Internship[] = [
     id: "INT-MERN",
     domain: "MERN Full Stack",
     status: "open",
-    bgColor: "bg-green-50",
-    borderColor: "border-green-500",
+    bgColor: '#fdf2f8',
+    borderColor: '#db2777',
     overview:
       "Students must complete one task in 5 days. This will be used for shortlisting candidates.",
     tasks: [
@@ -38,18 +36,14 @@ export const internships: Internship[] = [
         title: "Temple Tourism Website",
         description:
           "Create an informative tourism website showcasing temples across India.",
-        status: "open",
-        bgColor: "bg-amber-50",
-        borderColor: "border-amber-500"
+        status: "open"
       },
       {
         id: "TASK-M2",
         title: "Hospital Management System",
         description:
           "Build a patient, staff, and billing management system with modular dashboards.",
-        status: "open",
-        bgColor: "bg-blue-50",
-        borderColor: "border-blue-500"
+        status: "open"
       },
       {
         id: "TASK-M3",
@@ -57,8 +51,6 @@ export const internships: Internship[] = [
         description:
           "Users can design jackets with live preview and customization.",
         status: "upcoming",
-        bgColor: "bg-purple-50",
-        borderColor: "border-purple-500",
         links: ["https://varsitybase.com"]
       },
       {
@@ -67,8 +59,6 @@ export const internships: Internship[] = [
         description:
           "Create a modern website for NGO program details, volunteer signup, and donations.",
         status: "open",
-        bgColor: "bg-orange-50",
-        borderColor: "border-orange-600",
         links: ["https://edunetfoundation.org"]
       },
       {
@@ -77,8 +67,6 @@ export const internships: Internship[] = [
         description:
           "A skill development portal for students including login and course recommendations.",
         status: "close",
-        bgColor: "bg-red-50",
-        borderColor: "border-red-500",
         links: ["https://www.naanmudhalvan.tn.gov.in"]
       }
     ],
@@ -106,8 +94,8 @@ export const internships: Internship[] = [
     id: "INT-GWS",
     domain: "Google Workspace",
     status: "open",
-    bgColor: "bg-red-50",
-    borderColor: "border-red-200",
+    bgColor: '#eef2ff',
+    borderColor: '#4338ca',
     overview:
       "Students must build a Google AI-powered project in 5 days.",
     tasks: [
@@ -116,36 +104,28 @@ export const internships: Internship[] = [
         title: "Gemini Study Path Generator",
         description:
           "Generate study plans using Gemini API based on student performance.",
-        status: "open",
-        bgColor: "bg-pink-50",
-        borderColor: "border-pink-500"
+        status: "open"
       },
       {
         id: "TASK-G2",
         title: "Assignment Management System",
         description:
           "Faculty can create assignments and students can submit digitally.",
-        status: "open",
-        bgColor: "bg-yellow-50",
-        borderColor: "border-yellow-500"
+        status: "open"
       },
       {
         id: "TASK-G3",
         title: "Exam Proctoring AI System",
         description:
           "AI verifies identity and detects cheating using camera/video.",
-        status: "upcoming",
-        bgColor: "bg-indigo-50",
-        borderColor: "border-indigo-500"
+        status: "upcoming"
       },
       {
         id: "TASK-G4",
         title: "AI Code Review Assistant",
         description:
           "Gemini analyzes code, detects bugs, and suggests improvements.",
-        status: "close",
-        bgColor: "bg-red-50",
-        borderColor: "border-red-500"
+        status: "close"
       }
     ],
     technologyStack: [
@@ -171,8 +151,8 @@ export const internships: Internship[] = [
     id: "INT-AIML",
     domain: "AI / ML",
     status: "upcoming",
-    bgColor: "bg-rose-200",
-    borderColor: "border-rose-500",
+    bgColor: '#ecfeff',
+    borderColor: '#0891b2', 
     overview:
       "Build an AI/ML-powered project using real or synthetic datasets.",
     tasks: [
@@ -181,36 +161,28 @@ export const internships: Internship[] = [
         title: "Career Recommendation AI",
         description:
           "Suggests career paths based on skills, interests, and personality.",
-        status: "open",
-        bgColor: "bg-green-50",
-        borderColor: "border-green-600"
+        status: "open"
       },
       {
         id: "TASK-A2",
         title: "Job Market Trend Analyzer",
         description:
           "Analyze future jobs demand and skill gap using datasets.",
-        status: "open",
-        bgColor: "bg-blue-50",
-        borderColor: "border-blue-600"
+        status: "open"
       },
       {
         id: "TASK-A3",
         title: "Resume Screening AI",
         description:
           "Extracts resume content and suggests job match score.",
-        status: "open",
-        bgColor: "bg-yellow-50",
-        borderColor: "border-yellow-600"
+        status: "open"
       },
       {
         id: "TASK-A4",
         title: "Student Performance Predictor",
         description:
           "Predicts academic performance using ML model.",
-        status: "close",
-        bgColor: "bg-red-50",
-        borderColor: "border-red-600"
+        status: "close"
       }
     ],
     technologyStack: [
