@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-import {internships} from '@/data/career';
+import {internships} from '@/components/carrer/career';
 import {Calendar, Building2 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -59,8 +59,11 @@ import Link from 'next/link';
 //     </div>
 //   );
 // };
-
-export default function InternshipOpportunities() {
+interface homeInternship {
+  isHomePage: boolean;
+  homeInternship?: string[];
+}
+export default function InternshipOpportunities({isHomePage, homeInternship}: homeInternship) {
   // const internships = [
   //   {
   //     title: 'AI / ML Intern',
@@ -92,8 +95,14 @@ export default function InternshipOpportunities() {
     <div className=" px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {internships.map((internship, index) => (
-            // <InternshipCard key={index} {...internship}/>
+          {internships.filter(internship=>{
+            if(isHomePage){
+            return homeInternship?.includes(internship.id);
+            }
+            else{
+            return true;
+            }
+          }).map((internship, index) => (
             <div
               key={index}
               className={`border-2 border-solid rounded-2xl p-6 flex flex-col h-full shadow-sm hover:shadow-md transition-shadow `}

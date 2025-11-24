@@ -12,7 +12,7 @@
 "use client"
 import React, { useState } from 'react';
 import { Search, Home, Briefcase, Settings, Monitor, BarChart3, TrendingUp, ClipboardList, GraduationCap, ChevronRight } from 'lucide-react';
-import InternshipOpportunities from '@/components/homepage/InternshipOpportunities'
+import InternshipOpportunities from '@/components/carrer/InternshipOpportunities'
 
 interface CategoryButtonProps {
   icon: React.ReactNode;
@@ -125,8 +125,8 @@ export default function OpportunitiesSearch() {
           </div>
         </div>
       </div>
-    </div>
-    <InternshipOpportunities/>
+    </div> 
+    <InternshipOpportunities isHomePage= {false}/>
     </div>
   );
 }

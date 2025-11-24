@@ -1,17 +1,18 @@
-import MentorshipHero from '@/components/homepage/Hero'
-import Engagement  from '@/components/homepage/Engagement'
+import MentorshipHero from '@/components/Hero'
+import Engagement  from '@/components/Engagement'
 import React from 'react'
-import LearningPathPage from '@/components/homepage/leaningPath'
-import InternshipOpportunities from '@/components/homepage/InternshipOpportunities'
-import Faq from '@/components/homepage/Faq'
+import LearningPathPage from '@/components/learningpath/leaningPath'
+import InternshipOpportunities from '@/components/carrer/InternshipOpportunities'
+import Faq from '@/components/Faq'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
 const Homepage = () => {
+  const homeInternship = ["INT-AIML", "INT-GWS","INT-MERN"];
   return (
     <div>
       <MentorshipHero/>
-      <div id='learningPath' >
+      <div id='learningPath'>
         <LearningPathPage />
         <div className='flex justify-center items-center'>
         <Link
@@ -35,7 +36,7 @@ const Homepage = () => {
             Gain hands-on experience with real-world projects and expert mentorship
           </p>
         </div>
-            <InternshipOpportunities/>
+            <InternshipOpportunities isHomePage = {true} homeInternship = {homeInternship}/>
       </div>
       <Engagement/>
       <Faq/>

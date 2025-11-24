@@ -203,5 +203,5 @@ export const internships: Internship[] = [
       { name: "ML Accuracy & Features", weightage: "20%" }
     ],
     interviewCall: "Shortlisted candidates will be notified."
-  }
+  },
 ];
