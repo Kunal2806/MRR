@@ -8,9 +8,9 @@ import { motion } from "framer-motion";
 // import { cn } from "@/lib/utils";
 // import FloatingCircles from "./FloatingCircles";
 // import sproutImage from "@/assets/sprout-seed.png";
-import { domains, Domain } from "@/data/domains";
+import { domains, Domain } from "@/components/learningpath/domains";
 // import Link from "next/link";
-import {DomainNode} from "@/components/homepage/learningnode";
+import {DomainNode} from "@/components/learningpath/learningnode";
  
 // const offerings = [
 //   {

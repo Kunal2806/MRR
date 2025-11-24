@@ -35,7 +35,7 @@
 // }
 "use client"
 import React from 'react';
-import { internships } from '@/data/career';
+import { internships } from '@/components/carrer/career';
 import { Clock, ArrowLeft, CheckCircle, Sparkles, Target, Code, Award, Calendar, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';

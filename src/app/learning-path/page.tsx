@@ -1,5 +1,5 @@
 import React from 'react'
-import LearningPathPage from '@/components/homepage/leaningPath'
+import LearningPathPage from '@/components/learningpath/leaningPath'
 
 const LearningPage = () => {
   return (

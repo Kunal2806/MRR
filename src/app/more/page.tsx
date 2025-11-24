@@ -1,5 +1,5 @@
 import React from 'react'
-import Engagement  from '@/components/homepage/Engagement'
+import Engagement  from '@/components/Engagement'
 
 const more = () => {
   return (

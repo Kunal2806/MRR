@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Domain } from "@/data/domains";
+import { Domain } from "@/components/learningpath/domains";
 // import { Link } from "react-router-dom";
 // import { Sparkles } from "lucide-react";
 // import sproutImage from "@/assets/sprout-seed.png";
