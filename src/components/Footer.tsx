@@ -1,6 +1,8 @@
 'use client';
+import Link from "next/link";
+import Image from "next/image";
 
-import { useState } from 'react';
+// import { useState } from 'react';
 import { 
   Linkedin, 
   Twitter, 
@@ -26,11 +28,11 @@ const footerSections: FooterSection[] = [
   {
     title: 'Quick Links',
     links: [
-      { label: 'Browse Events', href: '/events' },
-      { label: 'Our Courses', href: '/courses' },
-      { label: 'About Sir', href: '/about' },
-      { label: 'Success Stories', href: '/success' },
-      { label: 'Become a Mentor', href: '/mentor' },
+      { label: 'Home', href: '/' },
+      { label: 'Events', href: '/events' },
+      { label: 'Internships', href: '/internships' },
+      { label: 'Learning Path', href: '/learning-path' },
+      { label: 'More', href: '/more' },
     ],
   },
   {
@@ -46,18 +48,18 @@ const footerSections: FooterSection[] = [
 ];
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
 
-  const handleSubscribe = () => {
-    if (email && email.includes('@')) {
-      console.log('Subscribing:', email);
-      // Add your subscription logic here
-      alert(`Subscribed with: ${email}`);
-      setEmail('');
-    } else {
-      alert('Please enter a valid email address');
-    }
-  };
+  // const handleSubscribe = () => {
+  //   if (email && email.includes('@')) {
+  //     console.log('Subscribing:', email);
+  //     // Add your subscription logic here
+  //     alert(`Subscribed with: ${email}`);
+  //     setEmail('');
+  //   } else {
+  //     alert('Please enter a valid email address');
+  //   }
+  // };
 
   return (
     <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
@@ -65,18 +67,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand Section */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
-                <div className="text-white text-2xl font-bold">🌱</div>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-teal-600 dark:text-teal-400">MENTOR</h3>
-                <p className="text-xs text-gray-600 dark:text-gray-400">RAVI RAUTELA</p>
-              </div>
+            <div className="py-4">
+             <Link href="/">
+                          <div className="flex items-center space-x-1 cursor-pointer">
+                              <Image src="/mentor-ravi-logo.png" alt="logo" height={150} width={150}></Image>
+                          </div>
+                        </Link>  
             </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-              Transforming education through creative events, collaborative learning, and expert mentorship.
-            </p>
             
             {/* Social Icons */}
             <div className="flex items-center gap-3">
@@ -170,28 +167,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Newsletter Subscription */}
-            <div>
-              <p className="text-sm font-medium text-gray-900 dark:text-white mb-3">
-                Subscribe to our newsletter
-              </p>
-              <div className="flex gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSubscribe()}
-                  placeholder="Your email"
-                  className="flex-1 px-4 py-2 text-sm border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
-                />
-                <button
-                  onClick={handleSubscribe}
-                  className="px-6 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"
-                >
-                  Subscribe
-                </button>
-              </div>
-            </div>
+            
           </div>
         </div>
 
