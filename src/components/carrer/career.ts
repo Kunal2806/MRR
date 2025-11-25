@@ -2,11 +2,18 @@ export type Status = "open" | "close" | "upcoming";
 
 export interface Internship {
   id: string;
+  title: string; // NEW
   domain: string;
   status: Status;
+  mode?: string; // NEW (remote/onsite/hybrid)
+  level?: string; // NEW (beginner/intermediate/advanced)
+  stipend?: string; // NEW
+  certificate?: string; // NEW
+  deadline?: string; // NEW
   bgColor: string;
   borderColor: string;
   overview: string;
+  eligibility?: string[]; // NEW
   tasks: {
     id: string;
     title: string;
@@ -24,32 +31,45 @@ export interface Internship {
 export const internships: Internship[] = [
   {
     id: "INT-MERN",
+    title: "MERN Full Stack Learning Internship",
     domain: "MERN Full Stack",
     status: "open",
-    bgColor: '#fdf2f8',
-    borderColor: '#db2777',
+    mode: "Remote",
+    level: "Intermediate",
+    stipend: "Unpaid",
+    certificate: "Issued on Completion",
+    deadline: "2025-01-10",
+    bgColor: "#fdf2f8",
+    borderColor: "#db2777",
     overview:
-      "Students must complete one task in 5 days. This will be used for shortlisting candidates.",
+      "Complete one project task in 5 days. Successful submissions will be shortlisted for interviews.",
+
+    eligibility: [
+      "Basic understanding of HTML/CSS/JavaScript",
+      "Familiarity with React/Node.js is preferred",
+      "College students or recent graduates"
+    ],
+
     tasks: [
       {
         id: "TASK-M1",
         title: "Temple Tourism Website",
         description:
-          "Create an informative tourism website showcasing temples across India.",
+          "Create a platform showcasing temples across India with details, galleries, and maps.",
         status: "open"
       },
       {
         id: "TASK-M2",
         title: "Hospital Management System",
         description:
-          "Build a patient, staff, and billing management system with modular dashboards.",
+          "Create dashboards for patients, staff, and billing, including authentication.",
         status: "open"
       },
       {
         id: "TASK-M3",
         title: "Custom Jacket Design Website",
         description:
-          "Users can design jackets with live preview and customization.",
+          "Provide real-time jacket customization preview and user design features.",
         status: "upcoming",
         links: ["https://varsitybase.com"]
       },
@@ -57,7 +77,7 @@ export const internships: Internship[] = [
         id: "TASK-M4",
         title: "NGO Training & Skill Website",
         description:
-          "Create a modern website for NGO program details, volunteer signup, and donations.",
+          "Modern website for NGO programs, volunteer enrollment, and donations.",
         status: "open",
         links: ["https://edunetfoundation.org"]
       },
@@ -65,143 +85,182 @@ export const internships: Internship[] = [
         id: "TASK-M5",
         title: "Government Skill Portal",
         description:
-          "A skill development portal for students including login and course recommendations.",
+          "Skill development portal with login, dashboard, and recommendations.",
         status: "close",
         links: ["https://www.naanmudhalvan.tn.gov.in"]
       }
     ],
+
     technologyStack: [
-      "MERN Stack",
-      "HTML/CSS/JS/PHP",
-      "GitHub CI/CD",
-      "Vercel/Netlify Deployment"
+      "MongoDB",
+      "Express.js",
+      "React.js",
+      "Node.js",
+      "GitHub Actions",
+      "Vercel / Netlify"
     ],
+
     submissionProcess: [
-      "Upload project to GitHub",
+      "Upload complete project to GitHub",
       "Deploy on Vercel/Netlify",
-      "Submit live link + repository link",
-      "Submit short PDF explaining features & learning"
+      "Submit repo link + live URL",
+      "Submit 1–2 page PDF summarizing features and learning outcome"
     ],
+
     timeline: "5 days",
     criteria: [
       { name: "Innovation & Learning", weightage: "30%" },
       { name: "Timely Completion", weightage: "50%" },
-      { name: "Extra Features", weightage: "20%" }
+      { name: "Extra Functionality", weightage: "20%" }
     ],
-    interviewCall: "Shortlisted candidates will be invited for online interview."
+    interviewCall: "Shortlisted candidates will be invited for an online interview."
   },
+
   {
     id: "INT-GWS",
+    title: "Google Workspace + AI Internship",
     domain: "Google Workspace",
     status: "open",
-    bgColor: '#eef2ff',
-    borderColor: '#4338ca',
+    mode: "Remote",
+    level: "Beginner",
+    stipend: "Unpaid",
+    certificate: "Provided upon completion",
+    deadline: "2025-01-15",
+    bgColor: "#eef2ff",
+    borderColor: "#4338ca",
     overview:
-      "Students must build a Google AI-powered project in 5 days.",
+      "Build a working project using Google AI and Workspace tools within 5 days.",
+
+    eligibility: [
+      "Basic programming understanding",
+      "Interest in automation and AI integration",
+      "No experience required"
+    ],
+
     tasks: [
       {
         id: "TASK-G1",
         title: "Gemini Study Path Generator",
         description:
-          "Generate study plans using Gemini API based on student performance.",
+          "Generate study roadmaps using Gemini API based on skills and grades.",
         status: "open"
       },
       {
         id: "TASK-G2",
         title: "Assignment Management System",
         description:
-          "Faculty can create assignments and students can submit digitally.",
+          "Allow teachers to create assignments and students to submit digitally.",
         status: "open"
       },
       {
         id: "TASK-G3",
-        title: "Exam Proctoring AI System",
+        title: "Exam Proctoring AI",
         description:
-          "AI verifies identity and detects cheating using camera/video.",
+          "Detect and flag cheating using camera input and verification.",
         status: "upcoming"
       },
       {
         id: "TASK-G4",
         title: "AI Code Review Assistant",
         description:
-          "Gemini analyzes code, detects bugs, and suggests improvements.",
+          "Review code, detect issues, and suggest improvements using Gemini.",
         status: "close"
       }
     ],
+
     technologyStack: [
       "Google Workspace API",
+      "Google Gemini AI",
       "Frontend + Backend",
-      "GitHub CI/CD",
+      "CI/CD",
       "Vercel Deployment"
     ],
+
     submissionProcess: [
       "Push code to GitHub",
-      "Deploy live",
-      "Submit PDF + links"
+      "Deploy project",
+      "Submit links + short documentation"
     ],
+
     timeline: "5 days",
     criteria: [
       { name: "Innovation", weightage: "30%" },
       { name: "Completion", weightage: "50%" },
-      { name: "Quality", weightage: "20%" }
+      { name: "Quality & UI", weightage: "20%" }
     ],
-    interviewCall: "Selected students will get interview invite."
+    interviewCall: "Selected candidates will receive an interview invitation."
   },
+
   {
     id: "INT-AIML",
+    title: "AI & Machine Learning Internship",
     domain: "AI / ML",
     status: "upcoming",
-    bgColor: '#ecfeff',
-    borderColor: '#0891b2', 
-    overview:
-      "Build an AI/ML-powered project using real or synthetic datasets.",
+    mode: "Remote",
+    level: "Intermediate",
+    stipend: "Unpaid",
+    certificate: "Issued after submission",
+    deadline: "2025-01-20",
+    bgColor: "#ecfeff",
+    borderColor: "#0891b2",
+    overview: "Build a functional AI/ML-based project using real or synthetic datasets.",
+
+    eligibility: [
+      "Basic Python knowledge",
+      "Familiarity with ML concepts preferred",
+      "Open to all students"
+    ],
+
     tasks: [
       {
         id: "TASK-A1",
         title: "Career Recommendation AI",
         description:
-          "Suggests career paths based on skills, interests, and personality.",
+          "Predict suitable career paths using skills and personality input.",
         status: "open"
       },
       {
         id: "TASK-A2",
         title: "Job Market Trend Analyzer",
         description:
-          "Analyze future jobs demand and skill gap using datasets.",
+          "Analyze and predict future job demand and skills based on data.",
         status: "open"
       },
       {
         id: "TASK-A3",
         title: "Resume Screening AI",
         description:
-          "Extracts resume content and suggests job match score.",
+          "Parse resume text and generate job match score.",
         status: "open"
       },
       {
         id: "TASK-A4",
         title: "Student Performance Predictor",
         description:
-          "Predicts academic performance using ML model.",
+          "Predict grades using ML model based on input patterns.",
         status: "close"
       }
     ],
+
     technologyStack: [
       "Python",
-      "Scikit-learn / TensorFlow",
-      "Flask / FastAPI / Streamlit",
-      "Dataset-based modeling"
+      "Scikit-learn",
+      "TensorFlow",
+      "Flask / FastAPI / Streamlit"
     ],
+
     submissionProcess: [
-      "Upload code",
-      "Deploy model",
-      "Submit report and links"
+      "Upload code to GitHub",
+      "Deploy model / notebook",
+      "Submit report + live notebooks"
     ],
+
     timeline: "5 days",
     criteria: [
       { name: "Innovation", weightage: "30%" },
       { name: "Completion", weightage: "50%" },
-      { name: "ML Accuracy & Features", weightage: "20%" }
+      { name: "Accuracy & Results", weightage: "20%" }
     ],
     interviewCall: "Shortlisted candidates will be notified."
-  },
+  }
 ];

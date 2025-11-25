@@ -36,10 +36,10 @@ const UserNavbar = () => {
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center space-x-6 gap-5">
-            {["home","events", "learning-path", "internships", "more" ].map((section) => (
+            {["home","events", "learning", "internships", "more.." ].map((section) => (
               <a
                 key={section}
-                href={section=="home"? "/"  :`/${section}`}
+                href={section=="home"? "/"  : section=="more.."? "more" : `/${section}`}
                 className="text-gray-600 hover:text-[#6347EB] text-md font-medium"
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
