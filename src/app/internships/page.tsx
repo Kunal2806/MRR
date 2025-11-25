@@ -104,7 +104,7 @@ export default function OpportunitiesSearch() {
         </div>
 
         {/* Category Buttons */}
-        <div className="bg-white rounded-2xl shadow-md p-8">
+        {/* <div className="bg-white rounded-2xl shadow-md p-8">
           <div className="flex flex-wrap gap-3 justify-center mb-4">
             {categories.map((category, index) => (
               <CategoryButton
@@ -123,7 +123,7 @@ export default function OpportunitiesSearch() {
               />
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </div> 
     <InternshipOpportunities isHomePage= {false}/>

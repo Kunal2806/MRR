@@ -1,51 +1,17 @@
-// import React from 'react';
-// import { internships } from '@/data/career';
-// import { MapPin, Clock, ArrowLeft, CheckCircle, Sparkles, Target } from 'lucide-react';
-// import Link from 'next/link';
-// import { useParams } from 'next/navigation';
-
-// export default function JobPosting() {
-//   // const skills = [
-//   //   'HTML', 'CSS', 'JavaScript', 'React.js', 'Node.js', 'Express.js', 'MongoDB', 'Git'
-//   // ];
-
-//   // const responsibilities = [
-//   //   'Develop frontend and backend components',
-//   //   'Integrate APIs and databases',
-//   //   'Deploy and maintain applications'
-//   // ];
-
-//   // const perks = [
-//   //   'Certificate of Completion',
-//   //   'Real Project Exposure',
-//   //   'Mentorship Support'
-//   // ];
-//   const params = useParams();
-//   const internshipId = params.id;
-//   return (
-//     <>
-//       {
-//         internships.map((internship,index)=>(
-          
-//         ))
-        
-//       }
-//     </>
-//   );
-// }
 "use client"
 import React from 'react';
 import { internships } from '@/components/carrer/career';
-import { Clock, ArrowLeft, CheckCircle, Sparkles, Target, Code, Award, Calendar, ExternalLink } from 'lucide-react';
+import { Clock, ArrowLeft, CheckCircle, Sparkles, Target, Code, Award, Calendar, ExternalLink, MapPin, DollarSign, GraduationCap, FileText } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 export default function JobPosting() {
   const params = useParams();
   const internshipId = params.content as string;
-  console.log(internshipId, params)
+
   // Find the specific internship
   const internship = internships.find(internship => internship.id === internshipId);
+
   // Handle case where internship is not found
   if (!internship) {
     return (
@@ -80,9 +46,9 @@ export default function JobPosting() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white">
+      <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <Link 
             href="/internships" 
@@ -92,16 +58,53 @@ export default function JobPosting() {
             Back to All Internships
           </Link>
           
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900">{internship.domain}</h1>
-              <div className="flex items-center gap-4 mt-3">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+            <div className="flex-1">
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">{internship.title}</h1>
+              <p className="text-xl text-gray-600 mb-4">{internship.domain}</p>
+              
+              <div className="flex flex-wrap items-center gap-4 mt-3">
+                {internship.mode && (
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <MapPin className="w-5 h-5" />
+                    <span>{internship.mode}</span>
+                  </div>
+                )}
+                
+                {internship.level && (
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <GraduationCap className="w-5 h-5" />
+                    <span>{internship.level}</span>
+                  </div>
+                )}
+                
+                {internship.stipend && (
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <DollarSign className="w-5 h-5" />
+                    <span>{internship.stipend}</span>
+                  </div>
+                )}
+                
                 <div className="flex items-center gap-2 text-gray-600">
                   <Clock className="w-5 h-5" />
                   <span>{internship.timeline}</span>
                 </div>
+                
                 {getStatusBadge(internship.status)}
               </div>
+
+              {internship.deadline && (
+                <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-red-50 border border-red-200 rounded-lg">
+                  <Calendar className="w-5 h-5 text-red-600" />
+                  <span className="text-sm font-semibold text-red-700">
+                    Application Deadline: {new Date(internship.deadline).toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    })}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -117,12 +120,23 @@ export default function JobPosting() {
           }}
         >
           <div className="flex items-start gap-3 mb-4">
-            <Sparkles className="w-6 h-6 mt-1" style={{ color: internship.borderColor }} />
+            <Sparkles className="w-6 h-6 mt-1 flex-shrink-0" style={{ color: internship.borderColor }} />
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Overview</h2>
               <p className="text-gray-700 text-lg leading-relaxed">{internship.overview}</p>
             </div>
           </div>
+          
+          {internship.certificate && (
+            <div className="mt-4 p-4 bg-white/80 rounded-lg">
+              <div className="flex items-center gap-2">
+                <FileText className="w-5 h-5" style={{ color: internship.borderColor }} />
+                <p className="font-medium text-gray-700">
+                  Certificate: <span style={{ color: internship.borderColor }}>{internship.certificate}</span>
+                </p>
+              </div>
+            </div>
+          )}
           
           {internship.interviewCall && (
             <div className="mt-4 p-4 bg-white/80 rounded-lg">
@@ -136,8 +150,29 @@ export default function JobPosting() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
+            {/* Eligibility Criteria */}
+            {internship.eligibility && internship.eligibility.length > 0 && (
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                  <CheckCircle className="w-6 h-6" style={{ color: internship.borderColor }} />
+                  Eligibility Criteria
+                </h2>
+                <ul className="space-y-3">
+                  {internship.eligibility.map((criterion, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <div 
+                        className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
+                        style={{ backgroundColor: internship.borderColor }}
+                      />
+                      <span className="text-gray-700">{criterion}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {/* Available Tasks */}
-            <div className="bg-white rounded-lg shadow-md hover:shadow-2xl p-6 border-2 border-solid">
+            <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <Target className="w-6 h-6" style={{ color: internship.borderColor }} />
                 Available Tasks
@@ -146,8 +181,7 @@ export default function JobPosting() {
                 {internship.tasks.map((task) => (
                   <div
                     key={task.id}
-                    className={`rounded-lg p-5 transition-all hover:shadow-lg`}
-                  >
+                    className="rounded-lg p-5 transition-all hover:shadow-lg border-2">
                     <div className="flex items-start justify-between mb-3">
                       <span className="text-xs font-mono bg-white px-2 py-1 rounded border border-gray-300">
                         {task.id}
@@ -167,7 +201,8 @@ export default function JobPosting() {
                               href={link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                              className="flex items-center gap-2 text-sm hover:underline"
+                              style={{ color: internship.borderColor }}
                             >
                               <ExternalLink className="w-4 h-4" />
                               <span className="truncate">{link}</span>
@@ -182,7 +217,7 @@ export default function JobPosting() {
             </div>
 
             {/* Submission Process */}
-            <div className="bg-white rounded-lg shadow-md hover:shadow-2xl p-6">
+            <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Submission Process</h2>
               <div className="space-y-4">
                 {internship.submissionProcess.map((step, idx) => (
@@ -203,7 +238,7 @@ export default function JobPosting() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Technology Stack */}
-            <div className="bg-white rounded-lg shadow-md hover:shadow-2xl p-6">
+            <div className="bg-white rounded-lg shadow-md p-6">
               <div className="flex items-center gap-2 mb-4">
                 <Code className="w-5 h-5" style={{ color: internship.borderColor }} />
                 <h3 className="text-xl font-bold text-gray-900">Technology Stack</h3>
@@ -226,7 +261,7 @@ export default function JobPosting() {
             </div>
 
             {/* Timeline */}
-            <div className="bg-white rounded-lg shadow-md hover:shadow-2xl p-6">
+            <div className="bg-white rounded-lg shadow-md p-6">
               <div className="flex items-center gap-2 mb-4">
                 <Calendar className="w-5 h-5" style={{ color: internship.borderColor }} />
                 <h3 className="text-xl font-bold text-gray-900">Timeline</h3>
@@ -238,7 +273,7 @@ export default function JobPosting() {
             </div>
 
             {/* Evaluation Criteria */}
-            <div className="bg-white rounded-lg shadow-md hover:shadow-2xl p-6">
+            <div className="bg-white rounded-lg shadow-md p-6">
               <div className="flex items-center gap-2 mb-4">
                 <Award className="w-5 h-5" style={{ color: internship.borderColor }} />
                 <h3 className="text-xl font-bold text-gray-900">Evaluation Criteria</h3>
@@ -260,7 +295,7 @@ export default function JobPosting() {
 
             {/* Apply Button */}
             <button
-              className="w-full py-4 rounded-lg text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-4 rounded-lg text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               style={{ backgroundColor: internship.borderColor }}
               disabled={internship.status === 'close'}
             >
