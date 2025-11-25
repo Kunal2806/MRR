@@ -33,7 +33,7 @@ export default function Dashboard() {
         router.push("/dashboard/admin/");
         break;
       case "USER":
-          router.push("/dashboard/user");
+          router.push("/");
           break;
       default:
         setIsRedirecting(false);
