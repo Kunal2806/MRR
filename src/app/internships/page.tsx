@@ -14,37 +14,37 @@ import React, { useState } from 'react';
 import { Search, Home, Briefcase, Settings, Monitor, BarChart3, TrendingUp, ClipboardList, GraduationCap, ChevronRight } from 'lucide-react';
 import InternshipOpportunities from '@/components/carrer/InternshipOpportunities'
 
-interface CategoryButtonProps {
-  icon: React.ReactNode;
-  label: string;
-}
+// interface CategoryButtonProps {
+//   icon: React.ReactNode;
+//   label: string;
+// }
 
-const CategoryButton: React.FC<CategoryButtonProps> = ({ icon, label }) => (
-  <button className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all text-sm font-medium text-gray-700">
-    {icon}
-    <span>{label}</span>
-    <ChevronRight className="w-4 h-4 ml-1 text-gray-400" />
-  </button>
-);
+// const CategoryButton: React.FC<CategoryButtonProps> = ({ icon, label }) => (
+//   <button className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all text-sm font-medium text-gray-700">
+//     {icon}
+//     <span>{label}</span>
+//     <ChevronRight className="w-4 h-4 ml-1 text-gray-400" />
+//   </button>
+// );
 
 export default function OpportunitiesSearch() {
   const [searchTerm, setSearchTerm] = useState('');
   const [experience, setExperience] = useState('');
   const [location, setLocation] = useState('');
 
-  const categories = [
-    { icon: <Home className="w-4 h-4" />, label: 'Remote' },
-    { icon: <Briefcase className="w-4 h-4" />, label: 'MNC' },
-    { icon: <Settings className="w-4 h-4" />, label: 'Engineering' },
-    { icon: <Monitor className="w-4 h-4" />, label: 'Software & IT' },
-    { icon: <BarChart3 className="w-4 h-4" />, label: 'Data Science' },
-    { icon: <TrendingUp className="w-4 h-4" />, label: 'Marketing' },
-  ];
+  // const categories = [
+  //   { icon: <Home className="w-4 h-4" />, label: 'Remote' },
+  //   { icon: <Briefcase className="w-4 h-4" />, label: 'MNC' },
+  //   { icon: <Settings className="w-4 h-4" />, label: 'Engineering' },
+  //   { icon: <Monitor className="w-4 h-4" />, label: 'Software & IT' },
+  //   { icon: <BarChart3 className="w-4 h-4" />, label: 'Data Science' },
+  //   { icon: <TrendingUp className="w-4 h-4" />, label: 'Marketing' },
+  // ];
 
-  const bottomCategories = [
-    { icon: <ClipboardList className="w-4 h-4" />, label: 'Project Mgmt' },
-    { icon: <GraduationCap className="w-4 h-4" />, label: 'Internship' },
-  ];
+  // const bottomCategories = [
+  //   { icon: <ClipboardList className="w-4 h-4" />, label: 'Project Mgmt' },
+  //   { icon: <GraduationCap className="w-4 h-4" />, label: 'Internship' },
+  // ];
 
   return (
     <div>
