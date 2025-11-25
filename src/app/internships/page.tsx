@@ -11,7 +11,7 @@
 // export default internships
 "use client"
 import React, { useState } from 'react';
-import { Search, Home, Briefcase, Settings, Monitor, BarChart3, TrendingUp, ClipboardList, GraduationCap, ChevronRight } from 'lucide-react';
+import { Search} from 'lucide-react';
 import InternshipOpportunities from '@/components/carrer/InternshipOpportunities'
 
 // interface CategoryButtonProps {
