@@ -3,7 +3,7 @@
 import authConfig from "@/auth.config";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import NextAuth, { DefaultSession } from "next-auth";
-import { JWT } from "next-auth/jwt";
+// import { JWT } from "next-auth/jwt";
 import { Role } from "./validaton-schema";
 import { findUserById } from "./actions/user";
 import { db } from "./db";
