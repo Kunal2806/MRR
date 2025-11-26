@@ -133,6 +133,3 @@ export const PasswordResetTokenTable = pgTable(
     uniqueIndex("password_reset_tokens_token_key").on(table.token),
   ]
 );
-
-
-
