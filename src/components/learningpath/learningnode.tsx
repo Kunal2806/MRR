@@ -1,9 +1,8 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Domain } from "@/components/learningpath/domains";
-// import { Link } from "react-router-dom";
-// import { Sparkles } from "lucide-react";
-// import sproutImage from "@/assets/sprout-seed.png";
-import { useIsMobile } from "@/hooks/use-mobile";
+
 interface DomainNodeProps {
   domain: Domain;
   isSelected: boolean;
@@ -13,11 +12,16 @@ interface DomainNodeProps {
   zIndex?: number;
 }
 
+// Custom hook for mobile detection
+const useIsMobile = () => {
+  if (typeof window === "undefined") return false;
+  return window.innerWidth < 768;
+};
+
 // Photorealistic nut styling with advanced textures and lighting
 const getNutStyle = (domainId: string) => {
   const nutStyles = {
     ai: {
-      // Almond - elongated, smooth with realistic gradient
       shape: "50% 50% 50% 50% / 68% 68% 32% 32%",
       gradient: `
         radial-gradient(ellipse at 30% 20%, #E8C7A0 0%, transparent 50%),
@@ -37,7 +41,6 @@ const getNutStyle = (domainId: string) => {
       texturePattern: "linear-gradient(90deg, transparent 48%, rgba(0,0,0,0.03) 49%, rgba(0,0,0,0.03) 51%, transparent 52%)",
     },
     webdev: {
-      // Hazelnut - perfectly round with shell texture
       shape: "50%",
       gradient: `
         radial-gradient(circle at 25% 25%, #C67D4A 0%, transparent 45%),
@@ -62,7 +65,6 @@ const getNutStyle = (domainId: string) => {
       `,
     },
     datascience: {
-      // Cashew - curved kidney shape with smooth surface
       shape: "58% 42% 35% 65% / 48% 68% 32% 52%",
       gradient: `
         radial-gradient(ellipse at 35% 25%, #FFF8E8 0%, transparent 40%),
@@ -82,7 +84,6 @@ const getNutStyle = (domainId: string) => {
       texturePattern: "linear-gradient(155deg, transparent 48%, rgba(0,0,0,0.02) 50%, transparent 52%)",
     },
     cybersecurity: {
-      // Peanut - netted shell texture, oval with dimple
       shape: "50% 50% 50% 50% / 64% 64% 36% 36%",
       gradient: `
         radial-gradient(ellipse at 28% 22%, #E8D4B8 0%, transparent 35%),
@@ -106,7 +107,6 @@ const getNutStyle = (domainId: string) => {
       `,
     },
     cloud: {
-      // Pistachio - split shell with green tint
       shape: "52% 48% 48% 52% / 58% 58% 42% 42%",
       gradient: `
         radial-gradient(ellipse at 30% 25%, #DEE8C8 0%, transparent 40%),
@@ -129,7 +129,6 @@ const getNutStyle = (domainId: string) => {
       `,
     },
     blockchain: {
-      // Walnut - heavily textured brain-like surface
       shape: "50%",
       gradient: `
         radial-gradient(circle at 28% 22%, #A68A6A 0%, transparent 35%),
@@ -158,7 +157,7 @@ const getNutStyle = (domainId: string) => {
   return nutStyles[domainId as keyof typeof nutStyles] || nutStyles.ai;
 };
 
-export const              DomainNode = ({ 
+export const DomainNode = ({ 
   domain, 
   isSelected, 
   isHidden, 
@@ -169,6 +168,7 @@ export const              DomainNode = ({
   const nutStyle = getNutStyle(domain.id);
   const floatDelay = Math.random() * 3;
   const isMobile = useIsMobile();
+
   return (
     <motion.div
       onClick={onClick}
@@ -198,14 +198,33 @@ export const              DomainNode = ({
         top: `${domain.position.y}%`,
         zIndex,
         willChange: "transform, opacity",
-        transform: "translateX(-50%)", // Center the node on its position
+        transform: "translateX(-50%)",
       }}
     >
-        {/* Nut Container with optimized floating animation */}
-        <motion.div 
-          className="relative group"
+      <motion.div 
+        className="relative group"
+        animate={{
+          y: [0, -8, 0],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: floatDelay,
+        }}
+      >
+        {/* Ground shadow */}
+        <motion.div
+          className="absolute -bottom-6 left-1/2 -translate-x-1/2 rounded-full blur-xl"
+          style={{
+            background: "radial-gradient(ellipse, rgba(0,0,0,0.3), transparent 65%)",
+            width: nutStyle.width,
+            height: "20px",
+            willChange: "transform, opacity",
+          }}
           animate={{
-            y: [0, -8, 0],
+            scale: [1, 1.15, 1],
+            opacity: [0.25, 0.3, 0.25],
           }}
           transition={{
             duration: 3,
@@ -213,33 +232,70 @@ export const              DomainNode = ({
             ease: "easeInOut",
             delay: floatDelay,
           }}
-        >
-          {/* Optimized ground shadow */}
-          <motion.div
-            className="absolute -bottom-6 left-1/2 -translate-x-1/2 rounded-full blur-xl"
-            style={{
-              background: "radial-gradient(ellipse, rgba(0,0,0,0.3), transparent 65%)",
-              width: nutStyle.width,
-              height: "20px",
-              willChange: "transform, opacity",
-            }}
-            animate={{
-              scale: [1, 1.15, 1],
-              opacity: [0.25, 0.3, 0.25],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: floatDelay,
-            }}
-          />
+        />
 
-          {/* Hover glow ring - hidden on mobile for performance */}
+        {/* Hover glow ring */}
+        <motion.div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block"
+          style={{
+            background: `radial-gradient(circle, ${nutStyle.accent}40, transparent 65%)`,
+            filter: "blur(20px)",
+            borderRadius: nutStyle.shape,
+            width: nutStyle.width,
+            height: nutStyle.height,
+            willChange: "transform, opacity",
+          }}
+          animate={{
+            scale: [1, 1.3, 1],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Orbiting leaves */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none hidden md:block"
+          animate={{ rotate: 360 }}
+          transition={{
+            repeat: Infinity,
+            duration: isSelected ? 12 : 24,
+            ease: "linear",
+          }}
+        >
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={`orbit-leaf-${i}`}
+              className="absolute text-lg"
+              style={{
+                left: "50%",
+                top: "50%",
+                transform: `rotate(${i * 90}deg) translate(${parseInt(nutStyle.width) + 25}px) rotate(-${i * 90}deg)`,
+                willChange: "transform, opacity",
+              }}
+              animate={{
+                opacity: isSelected ? [0.3, 0.5, 0.3] : [0.15, 0.25, 0.15],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.3,
+                ease: "easeInOut",
+              }}
+            >
+              🌿
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Active/Selected pulsing ring */}
+        {isSelected && (
           <motion.div
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block"
+            className="absolute inset-0"
             style={{
-              background: `radial-gradient(circle, ${nutStyle.accent}40, transparent 65%)`,
+              background: `radial-gradient(circle, transparent 50%, ${nutStyle.accent}50, transparent)`,
               filter: "blur(20px)",
               borderRadius: nutStyle.shape,
               width: nutStyle.width,
@@ -247,216 +303,127 @@ export const              DomainNode = ({
               willChange: "transform, opacity",
             }}
             animate={{
-              scale: [1, 1.3, 1],
+              scale: [1, 1.5, 1],
+              opacity: [0.4, 0.7, 0.4],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        )}
+
+        {/* Germination sprout */}
+        {isSelected && (
+          <motion.div
+            className="absolute -top-6 left-1/2 -translate-x-1/2"
+            initial={{ opacity: 0, y: 10, scale: 0 }}
+            animate={{ 
+              opacity: [0, 1, 1],
+              y: [10, -10, -10],
+              scale: [0, 1, 1],
+            }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+            }}
+          >
+            <div className="text-3xl">🌱</div>
+          </motion.div>
+        )}
+
+        {/* Domain info */}
+        <div className="flex flex-col items-center gap-2 right-0">
+          <motion.div
+            className="relative flex items-center justify-center"
+            style={{
+              width: "min(90px, 16vw)",
+              height: "min(90px, 16vw)",
+            }}
+            whileHover={{
+              scale: 1.05,
+            }}
+            animate={isSelected ? {
+              scale: [1, 1.08, 1],
+            } : {}}
+            transition={isSelected ? {
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            } : {}}
+          />
+
+          <motion.div 
+            className="flex items-center gap-1 md:gap-2"
+            whileHover={{ 
+              scale: 1.05,
+            }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div 
+              className="text-lg md:text-2xl" 
+              style={{ 
+                filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))",
+              }}
+            >
+              {domain.icon}
+            </div>
+            
+            <div className="text-[10px] md:text-sm font-bold text-foreground whitespace-nowrap">
+              {domain.name}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Hover tooltip */}
+        <motion.div
+          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+          whileHover={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          className="absolute -top-24 left-1/2 transform -translate-x-1/2 whitespace-nowrap pointer-events-none z-50 hidden md:block"
+        >
+          <motion.div 
+            className="relative px-5 py-3 rounded-2xl backdrop-blur-lg shadow-2xl"
+            style={{
+              background: "linear-gradient(135deg, rgba(255,255,255,0.97), rgba(250,250,250,0.95))",
+              boxShadow: `0 10px 40px rgba(0,0,0,0.15)`,
+              willChange: "transform",
+            }}
+            animate={{
+              y: [0, -4, 0],
             }}
             transition={{
               duration: 2,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-          />
-
-          {/* Optimized sparkle particles - reduced for mobile performance
-          <motion.div className="absolute inset-0 pointer-events-none hidden md:block">
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={`sparkle-${i}`}
-                className="absolute text-lg opacity-40"
-                style={{
-                  left: `${30 + i * 20}%`,
-                  top: `${20 + i * 20}%`,
-                  willChange: "transform, opacity",
-                }}
-                animate={{
-                  y: [0, -10, 0],
-                  opacity: [0.2, 0.4, 0.2],
-                }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.5 + floatDelay,
-                }}
-              >
-                ✨
-              </motion.div>
-            ))}
-          </motion.div> */}
-
-          {/* Optimized orbiting leaves - fewer for performance */}
-          <motion.div
-            className="absolute inset-0 pointer-events-none hidden md:block"
-            animate={{ rotate: 360 }}
-            transition={{
-              repeat: Infinity,
-              duration: isSelected ? 12 : 24,
-              ease: "linear",
-            }}
           >
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={`orbit-leaf-${i}`}
-                className="absolute text-lg"
-                style={{
-                  left: "50%",
-                  top: "50%",
-                  transform: `rotate(${i * 90}deg) translate(${parseInt(nutStyle.width) + 25}px) rotate(-${i * 90}deg)`,
-                  willChange: "transform, opacity",
-                }}
-                animate={{
-                  opacity: isSelected ? [0.3, 0.5, 0.3] : [0.15, 0.25, 0.15],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: i * 0.3,
-                  ease: "easeInOut",
-                }}
-              >
-                🌿
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Active/Selected pulsing ring - optimized */}
-          {isSelected && (
-            <motion.div
-              className="absolute inset-0"
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">{domain.icon}</span>
+              <div>
+                <div className="text-sm font-bold text-foreground/95">{domain.name}</div>
+                <div className="text-[11px] text-foreground/70">{domain.tagline}</div>
+              </div>
+            </div>
+            <div 
+              className="text-[11px] mt-2 font-semibold flex items-center gap-1" 
+              style={{ color: nutStyle.accent }}
+            >
+              <span>🌱</span> Tap to grow your tree
+            </div>
+            
+            <div 
+              className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45"
               style={{
-                background: `radial-gradient(circle, transparent 50%, ${nutStyle.accent}50, transparent)`,
-                filter: "blur(20px)",
-                borderRadius: nutStyle.shape,
-                width: nutStyle.width,
-                height: nutStyle.height,
-                willChange: "transform, opacity",
-              }}
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.4, 0.7, 0.4],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
+                background: "rgba(250,250,250,0.95)",
+                borderRight: `1px solid ${nutStyle.accent}50`,
+                borderBottom: `1px solid ${nutStyle.accent}50`,
               }}
             />
-          )}
-
-          {/* Germination sprout on click */}
-          {isSelected && (
-            <motion.div
-              className="absolute -top-6 left-1/2 -translate-x-1/2"
-              initial={{ opacity: 0, y: 10, scale: 0 }}
-              animate={{ 
-                opacity: [0, 1, 1],
-                y: [10, -10, -10],
-                scale: [0, 1, 1],
-              }}
-              transition={{
-                duration: 0.8,
-                ease: "easeOut",
-              }}
-            >
-              <div className="text-3xl">🌱</div>
-            </motion.div>
-          )}
-
-          {/* Sprout Image - replacing nut styling */}
-          <div className="flex flex-col items-center gap-2 right-0">
-            <motion.div
-              className="relative flex items-center justify-center"
-              style={{
-                width: "min(90px, 16vw)",
-                height: "min(90px, 16vw)",
-              }}
-              whileHover={{
-                scale: 1.05,
-              }}
-              animate={isSelected ? {
-                scale: [1, 1.08, 1],
-              } : {}}
-              transition={isSelected ? {
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              } : {}}
-            >
-              {/* Sprout Image removed */}
-            </motion.div> 
-
-            {/* Domain info below the seed */}
-            <motion.div 
-              className="flex items-center gap-1 md:gap-2"
-              whileHover={{ 
-                scale: 1.05,
-              }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div 
-                className="text-lg md:text-2xl" 
-                style={{ 
-                  filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))",
-                }}
-              >
-                {domain.icon}
-              </div>
-              
-              {/* Domain name */}
-              <div className="text-[10px] md:text-sm font-bold text-foreground whitespace-nowrap">
-                {domain.name}
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Enhanced hover tooltip - hidden on mobile for performance */}
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            whileHover={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute -top-24 left-1/2 transform -translate-x-1/2 whitespace-nowrap pointer-events-none z-50 hidden md:block"
-          >
-            <motion.div 
-              className="relative px-5 py-3 rounded-2xl backdrop-blur-lg shadow-2xl"
-              style={{
-                background: "linear-gradient(135deg, rgba(255,255,255,0.97), rgba(250,250,250,0.95))",
-                boxShadow: `0 10px 40px rgba(0,0,0,0.15)`,
-                willChange: "transform",
-              }}
-              animate={{
-                y: [0, -4, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <div className="flex items-center gap-3">
-                <span className="text-2xl">{domain.icon}</span>
-                <div>
-                  <div className="text-sm font-bold text-foreground/95">{domain.name}</div>
-                  <div className="text-[11px] text-foreground/70">{domain.tagline}</div>
-                </div>
-              </div>
-              <div 
-                className="text-[11px] mt-2 font-semibold flex items-center gap-1" 
-                style={{ color: nutStyle.accent }}
-              >
-                <span>🌱</span> Tap to grow your tree
-              </div>
-              
-              {/* Tooltip arrow */}
-              <div 
-                className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45"
-                style={{
-                  background: "rgba(250,250,250,0.95)",
-                  borderRight: `1px solid ${nutStyle.accent}50`,
-                  borderBottom: `1px solid ${nutStyle.accent}50`,
-                }}
-              />
-            </motion.div>
           </motion.div>
         </motion.div>
+      </motion.div>
     </motion.div>
   );
 };
