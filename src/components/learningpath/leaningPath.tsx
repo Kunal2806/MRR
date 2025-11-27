@@ -12,7 +12,7 @@ const LearningPathPage = () => {
   const router = useRouter();
   const [selectedDomain, setSelectedDomain] = useState<Domain | null>(null);
   const [hoveredDomainId, setHoveredDomainId] = useState<string | null>(null);
-  const [fromPage, setFromPage] = useState<string>("learning-path");
+  const [fromPage, setFromPage] = useState<string>("learning");
 
   // Auto-select domain from URL parameters
   useEffect(() => {
@@ -22,14 +22,14 @@ const LearningPathPage = () => {
       const domain = domains.find(d => d.id === domainId);
       if (domain) {
         setSelectedDomain(domain);
-        setFromPage(from || "learning-path");
+        setFromPage(from || "learning");
       }
     }
   }, [searchParams]);
 
   const handleDomainClick = (domain: Domain) => {
     setSelectedDomain(domain);
-    setFromPage("learning-path");
+    setFromPage("learning");
   };
 
   const handleBack = () => {
@@ -39,8 +39,8 @@ const LearningPathPage = () => {
     if (fromPage === "home") {
       router.push("/#explore");
     } else {
-      // Just clear the selection, stay on learning-path
-      router.push("/learning-path", { scroll: false });
+      // Just clear the selection, stay on learning
+      router.push("/learning", { scroll: false });
     }
   };
 

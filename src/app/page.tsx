@@ -16,7 +16,7 @@ const Homepage = () => {
         <LearningPathPage />
         <div className='flex justify-center items-center'>
         <Link
-            href="/learning-path"
+            href="/learning"
             className="group inline-flex items-center gap-2 text-lg font-bold text-primary hover:text-primary/80 transition-all duration-300"
           >
             <span className="relative py-0 my-[55px] text-[#6347EB]">
