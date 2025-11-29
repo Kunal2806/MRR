@@ -13,7 +13,7 @@
       return { error: "Invalid fields!" } as const;
     }
 
-    const { email, name, password, phone, role } = validation.data;
+    const { email, name, password, role } = validation.data;
 
     const existingUser = await findUserByEmail(email!);
     if (existingUser) {
@@ -25,7 +25,7 @@
       name,
       email,
       password: hashedPassword,
-      phone,
+      // phone,
       role: role || "USER",
     });
 

@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, Phone, Calendar, MapPin, Github, Linkedin, Briefcase, GraduationCap, Target, Clock, Code, Palette, Zap, X, Plus, Trash2 } from 'lucide-react';
+import { Mail, Phone, Calendar, MapPin, Github, Linkedin, Briefcase, GraduationCap, Target, Clock, Code, X, Plus, Trash2 } from 'lucide-react';
 
 interface Skill {
   name: string;
@@ -217,7 +217,8 @@ export default function StudentProfile() {
             </div>
 
             {/* Edit Button */}
-            <button onClick={()=>{isEditEnable? setisEditEnable(false):setisEditEnable(true)}} className="flex items-center gap-2 px-4 py-2 bg-[#6347EB] text-white rounded hover:bg-[#593fD4] transition-colors">
+            <button onClick={()=>{if(isEditEnable) setisEditEnable(false)
+              else setisEditEnable(true)}} className="flex items-center gap-2 px-4 py-2 bg-[#6347EB] text-white rounded hover:bg-[#593fD4] transition-colors">
               <span className="text-sm font-medium">Edit Profile</span>
             </button>
           </div>

@@ -6,7 +6,6 @@ interface UserData {
   email: string;
   name: string;
   password: string;
-  phone: string;
   role: (typeof UserRole.enumValues)[number];
 }
 
@@ -18,7 +17,6 @@ export async function createUser(data: UserData) {
         email: data.email,
         name: data.name,
         password: data.password,
-        phone: data.phone,
         role: data.role,
         updatedAt: new Date(),
       })

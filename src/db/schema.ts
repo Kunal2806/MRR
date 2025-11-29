@@ -14,6 +14,8 @@ import {
   uniqueIndex,
   uuid
 } from "drizzle-orm/pg-core";
+// import { Phone } from "lucide-react";
+// import { array, number, string } from "zod";
 
 // ===== ENUMS =====
 export const UserRole = pgEnum("user_role", ["ADMIN", "USER","JUDGE"]);
@@ -38,11 +40,10 @@ export const UsersTable = pgTable(
   },
   (table) => [
     // uniqueIndex("users_email_key").on(table.email),
-    index("users_name_email_phone_idx").on(table.name, table.email),
+    index("users_name_email_idx").on(table.name, table.email),
     // index("users_organization_idx").on(table.organizationId),
   ]
 );
-
 
 export type User = InferSelectModel<typeof UsersTable>;
 export type NewUser = InferInsertModel<typeof UsersTable>;
@@ -136,3 +137,29 @@ export const PasswordResetTokenTable = pgTable(
     uniqueIndex("password_reset_tokens_token_key").on(table.token),
   ]
 );
+
+export const UserStatus = pgEnum("user_status",["active", "inactive"]);
+
+export const UserDataTable = pgTable(
+  "user_data_table",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: uuid("user_id").notNull().references(()=>UsersTable.id, {onDelete: "cascade"}),
+    phone: text("phone"),
+    status: UserStatus("status").default("active"),
+    location: text("location"),
+    birthdate: timestamp("birthdate", {mode: "date"}),
+    githubLink: text("github_link"),
+    linkedinLink: text("linkedin_link"),
+    portfolioLink: text("portfolio_link"),
+    socialLinks: jsonb("social_links").$type<{name: string; link: string}[]>(),
+    skillsAndExpertise: jsonb("skills_and_expertise").$type<string[]>(),
+    careerGoals: text("career_goals"),
+    roleInterests: jsonb("role_interests").$type<string[]>(),
+    availability: text("availability"),
+    academic: jsonb("academic").$type<{title: string, yearLevel: string, majors: string , score: string, passingYear: string}[]>(),
+  },
+  (table)=> [
+    uniqueIndex("users_data_table_user_id_unique").on(table.userId),
+  ]
+)
