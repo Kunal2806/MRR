@@ -1,6 +1,8 @@
 import { db } from "@/db";
-import { UserRole, UsersTable } from "@/db/schema";
+import { UserDataTable, UserRole, UsersTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { TicketX } from "lucide-react";
+// import { sync } from "framer-motion";
 
 interface UserData {
   email: string;
@@ -9,9 +11,32 @@ interface UserData {
   role: (typeof UserRole.enumValues)[number];
 }
 
+// export async function createUser(data: UserData) {
+//   try {
+//     const results = await db
+//       .insert(UsersTable)
+//       .values({
+//         email: data.email,
+//         name: data.name,
+//         password: data.password,
+//         role: data.role,
+//         updatedAt: new Date(),
+//       })
+//       .returning();
+//     return results[0] || null;
+//   } catch (error) {
+//     console.error(
+//       `Error deleting email-verification-token with data: ${data}`,
+//       error
+//     );
+//     throw error;
+//   }
+// }
+
 export async function createUser(data: UserData) {
-  try {
-    const results = await db
+  try{
+    const result = await db.transaction(async (tx) => {
+      const [user] = await tx
       .insert(UsersTable)
       .values({
         email: data.email,
@@ -21,14 +46,23 @@ export async function createUser(data: UserData) {
         updatedAt: new Date(),
       })
       .returning();
-    return results[0] || null;
-  } catch (error) {
-    console.error(
-      `Error deleting email-verification-token with data: ${data}`,
-      error
-    );
-    throw error;
-  }
+      if(!user){
+        throw new Error("User Creation Failed");
+      }
+
+      await tx
+      .insert(UserDataTable)
+      .values({
+        userId: user.id
+      })
+
+      return user;
+  })
+  return result;
+}   catch (error) {
+  console.error("Error creating user and profile", error);
+  throw error;
+}
 }
 
 export async function deleteUser(id: string) {
