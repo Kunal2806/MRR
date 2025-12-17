@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { UserDataTable, UserRole, UsersTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { TicketX } from "lucide-react";
+// import { TicketX } from "lucide-react";
 // import { sync } from "framer-motion";
 
 interface UserData {
