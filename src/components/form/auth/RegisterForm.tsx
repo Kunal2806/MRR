@@ -43,7 +43,7 @@ const RegisterForm = ({ text, role }: RegisterFormProps) => {
     defaultValues: {
       name: "",
       email: "",
-      phone: "",
+      // phone: "",
       password: "",
       role: "USER",
     },
@@ -130,7 +130,7 @@ const RegisterForm = ({ text, role }: RegisterFormProps) => {
                       </div>
                     </FormControl>
                     <FormDescription className="text-left">
-                      We&aposll never share your email with anyone else
+                      We&apos;ll never share your email with anyone else
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -138,7 +138,7 @@ const RegisterForm = ({ text, role }: RegisterFormProps) => {
               />
 
               {/* Phone Field */}
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="phone"
                 render={({ field }) => (
@@ -154,13 +154,13 @@ const RegisterForm = ({ text, role }: RegisterFormProps) => {
                         className="h-8 r-10 w-full rounded-lg border-custom-slate/30 focus:border-dark-blue focus:ring-1 focus:ring-dark-blue transition-all duration-200"
                       />
                     </FormControl>
-                    {/* <FormDescription className="text-left text-xs text-custom-slate/80">
+                     <FormDescription className="text-left text-xs text-custom-slate/80">
                       Enter a phone number to receive messages
-                    </FormDescription> */}
+                    </FormDescription> 
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
 
               {/* Password Field */}
               <FormField

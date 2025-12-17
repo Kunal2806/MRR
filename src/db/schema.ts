@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // ===== 1. UPDATED SCHEMA (schema.ts) =====
-import { InferModel } from "drizzle-orm";
+// import { InferModel } from "drizzle-orm";
+import { InferSelectModel, InferInsertModel } from "drizzle-orm";
+
 import {
   index,
   jsonb,
@@ -12,11 +14,13 @@ import {
   uniqueIndex,
   uuid
 } from "drizzle-orm/pg-core";
+// import { Phone } from "lucide-react";
+// import { array, number, string } from "zod";
 
 // ===== ENUMS =====
-export const UserRole = pgEnum("user_role", ["ADMIN", "USER"]);
+export const UserRole = pgEnum("user_role", ["ADMIN", "USER","JUDGE"]);
 export const VerificationStatus = pgEnum("verification_status", ["PENDING", "APPROVED", "REJECTED"]);
-export const ProjectStatus = pgEnum("project_status", ["DRAFT", "PUBLISHED", "ARCHIVED"]);
+// export const ProjectStatus = pgEnum("project_status", ["DRAFT", "PUBLISHED", "ARCHIVED"]);
 
 // ===== USERS =====
 export const UsersTable = pgTable(
@@ -24,72 +28,72 @@ export const UsersTable = pgTable(
   {
     id: uuid("id").defaultRandom().primaryKey().notNull(),
     name: text("name").notNull(),
-    email: text("email").notNull(),
+    email: text("email").notNull().unique(),
     emailVerified: timestamp("email_verified", { mode: "date" }),
     password: text("password").notNull(),
-    phone: text("phone"),
-    phoneVerified: timestamp("phone_verified", { mode: "date" }),
+    // phone: text("phone").notNull(),
+    // phoneVerified: timestamp("phone_verified", { mode: "date" }),
     role: UserRole("role").default("USER").notNull(),
-    organizationId: uuid("organization_id"),
+    // organizationId: uuid("organization_id"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (table) => [
-    uniqueIndex("users_email_key").on(table.email),
-    index("users_name_email_phone_idx").on(table.name, table.email, table.phone),
-    index("users_organization_idx").on(table.organizationId),
+    // uniqueIndex("users_email_key").on(table.email),
+    index("users_name_email_idx").on(table.name, table.email),
+    // index("users_organization_idx").on(table.organizationId),
   ]
 );
 
-export type User = InferModel<typeof UsersTable>;
-export type NewUser = InferModel<typeof UsersTable, "insert">;
+export type User = InferSelectModel<typeof UsersTable>;
+export type NewUser = InferInsertModel<typeof UsersTable>;
 
-// ===== PROJECTS =====
-export const ProjectsTable = pgTable(
-  "projects",
-  {
-    id: uuid("id").defaultRandom().primaryKey().notNull(),
-    name: text("name").notNull(),
-    description: text("description"),
-    logo: text("logo"),
-    status: ProjectStatus("status").default("DRAFT").notNull(),
-    coverImage: text("cover_image"),
-    websiteUrl:text("website_url"),
-    bio:text("bio"),
-    slug: text("slug"), // Added for URL-friendly project identification
-    userId: uuid("user_id").notNull(),
-    contentJson: jsonb("content_json"),
-    createdAt: timestamp("created_at").defaultNow().notNull(),
-    updatedAt: timestamp("updated_at").defaultNow().notNull(),
-  },
-  (table) => [
-    uniqueIndex("projects_slug_key").on(table.slug),
-    index("projects_user_idx").on(table.userId),
-    index("projects_name_idx").on(table.name),
-    index("projects_status_idx").on(table.status),
-    index("projects_created_at_idx").on(table.createdAt),
-  ]
-);
+// // ===== PROJECTS =====
+// export const ProjectsTable = pgTable(
+//   "projects",
+//   {
+//     id: uuid("id").defaultRandom().primaryKey().notNull(),
+//     name: text("name").notNull(),
+//     description: text("description"),
+//     logo: text("logo"),
+//     status: ProjectStatus("status").default("DRAFT").notNull(),
+//     coverImage: text("cover_image"),
+//     websiteUrl:text("website_url"),
+//     bio:text("bio"),
+//     slug: text("slug"), // Added for URL-friendly project identification
+//     userId: uuid("user_id").notNull(),
+//     contentJson: jsonb("content_json"),
+//     createdAt: timestamp("created_at").defaultNow().notNull(),
+//     updatedAt: timestamp("updated_at").defaultNow().notNull(),
+//   },
+//   (table) => [
+//     uniqueIndex("projects_slug_key").on(table.slug),
+//     index("projects_user_idx").on(table.userId),
+//     index("projects_name_idx").on(table.name),
+//     index("projects_status_idx").on(table.status),
+//     index("projects_created_at_idx").on(table.createdAt),
+//   ]
+// );
 
-export type Project = InferModel<typeof ProjectsTable>;
-export type NewProject = InferModel<typeof ProjectsTable, "insert">;
+// export type Project = InferModel<typeof ProjectsTable>;
+// export type NewProject = InferModel<typeof ProjectsTable, "insert">;
 
-// Type definitions for JSON content
-export interface ProjectContentItem {
-  id: string;
-  heading: string;
-  description: string;
-  order?: number;
-}
+// // Type definitions for JSON content
+// export interface ProjectContentItem {
+//   id: string;
+//   heading: string;
+//   description: string;
+//   order?: number;
+// }
 
-export interface ProjectContent {
-  sections: ProjectContentItem[];
-  metadata?: {
-    version?: string;
-    lastModified?: string;
-    [key: string]: any;
-  };
-}
+// export interface ProjectContent {
+//   sections: ProjectContentItem[];
+//   metadata?: {
+//     version?: string;
+//     lastModified?: string;
+//     [key: string]: any;
+//   };
+// }
 
 // ===== AUTH TABLES (keeping existing) =====
 export const EmailVerificationTokenTable = pgTable(
@@ -133,3 +137,29 @@ export const PasswordResetTokenTable = pgTable(
     uniqueIndex("password_reset_tokens_token_key").on(table.token),
   ]
 );
+
+export const UserStatus = pgEnum("user_status",["active", "inactive"]);
+
+export const UserDataTable = pgTable(
+  "user_data_table",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: uuid("user_id").notNull().references(()=>UsersTable.id, {onDelete: "cascade"}),
+    phone: text("phone"),
+    status: UserStatus("status").default("active"),
+    location: text("location"),
+    birthdate: timestamp("birthdate", {mode: "date"}),
+    githubLink: text("github_link"),
+    linkedinLink: text("linkedin_link"),
+    portfolioLink: text("portfolio_link"),
+    socialLinks: jsonb("social_links").$type<{name: string; link: string}[]>(),
+    skillsAndExpertise: jsonb("skills_and_expertise").$type<string[]>(),
+    careerGoals: text("career_goals"),
+    roleInterests: jsonb("role_interests").$type<string[]>(),
+    availability: text("availability"),
+    academic: jsonb("academic").$type<{title: string, yearLevel: string, majors: string , score: string, passingYear: string}[]>(),
+  },
+  (table)=> [
+    uniqueIndex("users_data_table_user_id_unique").on(table.userId),
+  ]
+)

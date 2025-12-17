@@ -3,7 +3,7 @@
 "use client";
 
 import { useCurrentUser } from "@/hooks/auth";
-import { useProjects } from "@/hooks/useProjects";
+// import { useProjects } from "@/hooks/useProjects";
 import { Plus, Save, Trash2 } from "lucide-react";
 import React, { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -42,7 +42,7 @@ export default function CreateProjectForm() {
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [coverPreview, setCoverPreview] = useState<string | null>(null);
 
-  const { createProject } = useProjects();
+  // const { createProject } = useProjects();
   const user = useCurrentUser();
 
   const {
@@ -109,7 +109,7 @@ export default function CreateProjectForm() {
         },
       };
 
-      const newProject = await createProject(projectData);
+      // const newProject = await createProject(projectData);
 
       reset();
       setLogoPreview(null);

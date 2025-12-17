@@ -40,9 +40,9 @@ export const RegisterUserSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
   name: nameSchema,
-  phone: z
-    .string({ required_error: "Number is required!" })
-    .min(1, { message: "Number is required!" })
-    .min(10, { message: "Number must be at least 10 characters." }),
+  // phone: z
+  //   .string({ required_error: "Number is required!" })
+  //   .min(1, { message: "Number is required!" })
+  //   .min(10, { message: "Number must be at least 10 characters." }),
   role: RoleEnum.optional(),
 });

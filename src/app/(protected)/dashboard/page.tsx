@@ -1,17 +1,18 @@
 "use client";
 
-import { useCurrentRole } from "@/hooks/auth";
+import { useCurrentRole} from "@/hooks/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
   const router = useRouter();
   const role = useCurrentRole();
+  // const userid = useCurrentUser();
   const [isRedirecting, setIsRedirecting] = useState(false);
 
 
   console.log("role",role);
-  
+  // console.log("userid----",userid)
   if (!role) {
     window.location.reload();
   }
