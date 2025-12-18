@@ -163,3 +163,35 @@ export const UserDataTable = pgTable(
     uniqueIndex("users_data_table_user_id_unique").on(table.userId),
   ]
 )
+
+
+export const JobStatus = pgEnum("job_status", ["open","close","upcoming"]);
+export const JobLevel = pgEnum("job_level",["beginner","intermediate", "advance"])
+export const JobInternshipTable = pgTable(
+  "job_internship", {
+    id: uuid("id").defaultRandom().primaryKey(),
+    title: text("title"), // NEW
+    domain: text("domain"),
+    status: JobStatus("status").default("open"),
+    mode: text("mode"), // NEW (remote/onsite/hybrid)
+    level: JobLevel("level"), // NEW (beginner/intermediate/advanced)
+    stipend: text("stipend"), // NEW
+    certificate: text("certificate"), // NEW
+    deadline: text("deadline"), // NEW
+    bgColor: text("bg_color"),
+    borderColor: text("border_color"),
+    overview: text("overview"),
+    eligibility: jsonb("eligibility").$type<string[]>(), // NEW
+    tasks: jsonb("tasks").$type<{id: string, title: string, description: string, status: "open" | "close" | "upcoming", links: string[]}[]>(),
+    technologyStack: jsonb("technology_stack").$type<string[]>(),
+    submissionProcess: jsonb("submission_process").$type<string[]>(),
+    timeline: text("timeline"),
+    criteria: jsonb("criteria").$type<{ name: string; weightage: string }[]>(),
+    interviewCall: text("interview_call")
+  },
+  (table)=>[
+    index("job_internship_domain_idx").on(table.domain),
+    index("job_internship_status_idx").on(table.status),
+    index("job_internship_level_idx").on(table.level)
+  ]
+)
