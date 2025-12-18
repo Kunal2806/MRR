@@ -1,32 +1,7 @@
-export type Status = "open" | "close" | "upcoming";
+import { Internship } from "./Internship";
 
-export interface Internship {
-  id: string;
-  title: string; // NEW
-  domain: string;
-  status: Status;
-  mode?: string; // NEW (remote/onsite/hybrid)
-  level?: string; // NEW (beginner/intermediate/advanced)
-  stipend?: string; // NEW
-  certificate?: string; // NEW
-  deadline?: string; // NEW
-  bgColor: string;
-  borderColor: string;
-  overview: string;
-  eligibility?: string[]; // NEW
-  tasks: {
-    id: string;
-    title: string;
-    description: string;
-    status: Status;
-    links?: string[];
-  }[];
-  technologyStack: string[];
-  submissionProcess: string[];
-  timeline: string;
-  criteria: { name: string; weightage: string }[];
-  interviewCall: string;
-}
+export type Status = "open" | "close" | "upcoming";
+export type Level = "beginner" | "intermediate" | "advance";
 
 export const internships: Internship[] = [
   {
@@ -35,9 +10,9 @@ export const internships: Internship[] = [
     domain: "MERN Full Stack",
     status: "open",
     mode: "Remote",
-    level: "Intermediate",
+    level: "intermediate",
     stipend: "Unpaid",
-    certificate: "Issued on Completion",
+    certificate: "Issue on Completion",
     deadline: "2025-01-10",
     bgColor: "#fdf2f8",
     borderColor: "#db2777",
@@ -122,7 +97,7 @@ export const internships: Internship[] = [
     domain: "Google Workspace",
     status: "open",
     mode: "Remote",
-    level: "Beginner",
+    level: "beginner",
     stipend: "Unpaid",
     certificate: "Provided upon completion",
     deadline: "2025-01-15",
@@ -197,7 +172,7 @@ export const internships: Internship[] = [
     domain: "AI / ML",
     status: "upcoming",
     mode: "Remote",
-    level: "Intermediate",
+    level: "intermediate",
     stipend: "Unpaid",
     certificate: "Issued after submission",
     deadline: "2025-01-20",
