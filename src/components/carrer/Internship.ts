@@ -1,13 +1,15 @@
-import { Status, Level } from "./career";
-
+// import { Status, Level } from "./career";const Status type
+// const type Status = ["remote"]
+//  type Status = ["open","close","upcoming"];
+//  type Level = ["beginner","intermediate", "advance"];
 
 export interface Internship {
   id: string;
   title: string; // NEW
   domain: string;
-  status: Status;
+  status: string;
   mode?: string; // NEW (remote/onsite/hybrid)
-  level?: Level; // NEW (beginner/intermediate/advanced)
+  level?: string; // NEW (beginner/intermediate/advanced)
   stipend?: string; // NEW
   certificate?: string; // NEW
   deadline?: string; // NEW
@@ -19,7 +21,7 @@ export interface Internship {
     id: string;
     title: string;
     description: string;
-    status: Status;
+    status: string;
     links?: string[];
   }[];
   technologyStack: string[];

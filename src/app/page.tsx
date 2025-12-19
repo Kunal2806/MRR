@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
 const Homepage = () => {
-  const homeInternship = ["INT-AIML", "INT-GWS","INT-MERN"];
+  const homeInternship = ["5ff1a935-c568-4d80-b7df-39c7fcdf298b", "INT-GWS","INT-MERN"];
   return (
     <div>
       <MentorshipHero/>

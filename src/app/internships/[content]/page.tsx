@@ -1,16 +1,60 @@
 "use client"
-import React from 'react';
-import { internships } from '@/components/carrer/career';
+import React, { useEffect, useState } from 'react';
+// import { internships } from '@/components/carrer/career';
 import { Clock, ArrowLeft, CheckCircle, Sparkles, Target, Code, Award, Calendar, ExternalLink, MapPin, DollarSign, GraduationCap, FileText } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { Internship } from '@/components/carrer/Internship';
 
 export default function JobPosting() {
   const params = useParams();
   const internshipId = params.content as string;
-
+  const [internship, setInternship] = useState<Internship>();
   // Find the specific internship
-  const internship = internships.find(internship => internship.id === internshipId);
+  // const internship = internships.find(internship => internship.id === internshipId);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`/api/internship/${internshipId}`);
+      
+      if (!response.ok) {
+        console.error('Failed to fetch internship');
+        return;
+      }
+      
+      const result = await response.json();
+      // console.log(";result: ", result)
+      setInternship({
+        id: result.id ?? "",
+        title: result.title ?? "", // NEW
+        domain: result.domain ?? "",
+        status: result.status ?? "",
+        mode: result.mode ?? "", // NEW (remote/onsite/hybrid)
+        level: result.level ?? "", // NEW (beginner/intermediate/advanced)
+        stipend: result.stipend ?? "", // NEW
+        certificate: result.cerificate ?? "", // NEW
+        deadline: result.deadline ?? "", // NEW
+        bgColor: result.bgColor ?? "",
+        borderColor: result.borderColor ?? "",
+        overview: result.overview ?? "",
+        eligibility: result.eligibility ?? [],  // NEW
+        tasks: result.tasks ?? [],
+        technologyStack: result.technologyStack ?? [],
+        submissionProcess: result.submissionProcess ?? [],
+        timeline: result.timeline ?? "",
+        criteria: result.criteria ?? [],
+        interviewCall: result.interviewCall ?? ""
+      });// result.data is now a single object
+      // console.log("internhsip" ,internship)
+    } catch (error) {
+      console.error('Error fetching internship:', error);
+    }
+  };
+  
+  if (internshipId) {
+    fetchData();
+  }
+}, [internshipId]);
 
   // Handle case where internship is not found
   if (!internship) {
@@ -176,9 +220,9 @@ export default function JobPosting() {
               <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <Target className="w-6 h-6" style={{ color: internship.borderColor }} />
                 Available Tasks
-              </h2>
+              </h2> 
               <div className="space-y-4">
-                {internship.tasks.map((task) => (
+                {internship.tasks?.length > 0 && internship.tasks.map((task) => (
                   <div
                     key={task.id}
                     className="rounded-lg p-5 transition-all hover:shadow-lg border-2">
