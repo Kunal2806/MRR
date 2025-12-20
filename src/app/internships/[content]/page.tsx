@@ -5,8 +5,11 @@ import { Clock, ArrowLeft, CheckCircle, Sparkles, Target, Code, Award, Calendar,
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Internship } from '@/components/carrer/Internship';
+import { useSession } from 'next-auth/react';
 
 export default function JobPosting() {
+  const { data: session } = useSession();
+  const userId = session?.user.id;  
   const params = useParams();
   const internshipId = params.content as string;
   const [internship, setInternship] = useState<Internship>();
@@ -55,6 +58,21 @@ useEffect(() => {
     fetchData();
   }
 }, [internshipId]);
+
+async function handleApply() {
+
+  // console.log("applying");
+  const response = await fetch("/api/jobapplication",{
+    method: "POST",
+    headers: {
+      "Content-Type" : "application/json"
+    },
+    body: JSON.stringify({internshipId, userId})
+  });
+
+  const result = await response.json();
+  console.log(result.message);
+}
 
   // Handle case where internship is not found
   if (!internship) {
@@ -342,6 +360,7 @@ useEffect(() => {
               className="w-full py-4 rounded-lg text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               style={{ backgroundColor: internship.borderColor }}
               disabled={internship.status === 'close'}
+              onClick={()=>handleApply()}
             >
               {internship.status === 'close' ? 'Applications Closed' : 
                internship.status === 'upcoming' ? 'Opening Soon' : 

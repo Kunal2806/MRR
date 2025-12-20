@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // ===== 1. UPDATED SCHEMA (schema.ts) =====
 // import { InferModel } from "drizzle-orm";
+import { table } from "console";
 import { InferSelectModel, InferInsertModel } from "drizzle-orm";
 
 import {
@@ -193,5 +194,23 @@ export const JobInternshipTable = pgTable(
     index("job_internship_domain_idx").on(table.domain),
     index("job_internship_status_idx").on(table.status),
     index("job_internship_level_idx").on(table.level)
+  ]
+)
+
+export const JobInternshipApplicationStatus = pgEnum("job_internship_application_status", ["applied", "selected", "rejected"]);
+
+export const JobInternshipApplication = pgTable(
+  "job_internship_application", {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: uuid("user_id").notNull().references(()=> UsersTable.id, {onDelete: "cascade"}),
+    internshipJobId: uuid("internship_job_id").notNull().references(()=> JobInternshipTable.id, {onDelete: "cascade"}),
+    status: JobInternshipApplicationStatus("status").default("applied"),
+    appliedAt: timestamp("applied_at").defaultNow().notNull()
+  },
+  (table)=>[
+    index("job_internship_application_id_idx").on(table.id),
+    index("job_internship_application_user_id_idx").on(table.userId),
+    index("job_internship_application_internship_job_id_idx").on(table.internshipJobId),
+    uniqueIndex("job_internship_application_user_job_unique").on(table.userId, table.internshipJobId)
   ]
 )

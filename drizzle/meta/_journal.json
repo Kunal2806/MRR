@@ -15,6 +15,13 @@
       "when": 1766085390760,
       "tag": "0001_condemned_lifeguard",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1766158366770,
+      "tag": "0002_huge_steel_serpent",
+      "breakpoints": true
     }
   ]
 }
