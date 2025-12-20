@@ -224,7 +224,7 @@ export default function StudentProfile() {
       }
 
       const data = await response.json();
-      console.log("Update successful:", data);
+      console.log("Update successful:", data); 
       
       setRefresh((pre)=>!pre);
       setisEditEnable(false);
