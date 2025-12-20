@@ -13,6 +13,7 @@
 import React, { useState } from 'react';
 import { Search} from 'lucide-react';
 import InternshipOpportunities from '@/components/carrer/InternshipOpportunities'
+// import {fetchData} from '@/components/carrer/career'
 
 // interface CategoryButtonProps {
 //   icon: React.ReactNode;
@@ -45,6 +46,7 @@ export default function OpportunitiesSearch() {
   //   { icon: <ClipboardList className="w-4 h-4" />, label: 'Project Mgmt' },
   //   { icon: <GraduationCap className="w-4 h-4" />, label: 'Internship' },
   // ];
+  // fetchData();
 
   return (
     <div>

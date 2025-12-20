@@ -1,8 +1,14 @@
 "use client"
-import React from 'react';
-import { internships } from '@/components/carrer/career';
+import React, { useEffect, useState } from 'react';
+// import { internships } from '@/components/carrer/career';
 import { Calendar, Building2 } from 'lucide-react';
 import Link from 'next/link';
+import { Internship } from './Internship';
+
+// import { Internship } from "./Internship";
+
+export type Status = "open" | "close" | "upcoming";
+export type Level = "beginner" | "intermediate" | "advance";
 
 interface HomeInternshipProps {
   isHomePage: boolean;
@@ -13,7 +19,20 @@ export default function InternshipOpportunities({
   isHomePage, 
   homeInternship 
 }: HomeInternshipProps) {
+
+const [internships, setInternships] = useState<Internship[]>([]);
   
+useEffect(() => {
+  const fetchData = async() => {
+  const response  = await fetch("/api/internship/");
+  const result = await response.json();
+    // console.log(data)
+    setInternships(result.data);
+    // internships.push(data);
+  }
+  fetchData();
+}, [])
+
   const filteredInternships = internships.filter(internship => {
     if (isHomePage && homeInternship) {
       return homeInternship.includes(internship.id);
