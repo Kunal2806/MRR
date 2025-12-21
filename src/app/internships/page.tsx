@@ -10,7 +10,7 @@
 
 // export default internships
 "use client"
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Search} from 'lucide-react';
 import InternshipOpportunities from '@/components/carrer/InternshipOpportunities'
 // import {fetchData} from '@/components/carrer/career'

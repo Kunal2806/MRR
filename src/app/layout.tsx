@@ -1,3 +1,4 @@
+// app/layout.tsx
 import 'react-quill/dist/quill.snow.css';
 
 import { auth } from "@/auth";
@@ -6,8 +7,7 @@ import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import LayoutWrapper from '@/components/LayoutWrapper';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,9 +30,10 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html lang="en">
         <body className={inter.className}>
-          <Navbar/>
-          {children} <Toaster />
-          <Footer/>
+          <LayoutWrapper>
+            {children}
+          </LayoutWrapper>
+          <Toaster />
         </body>
       </html>
     </SessionProvider>
