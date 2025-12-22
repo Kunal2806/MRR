@@ -2,7 +2,7 @@
 'use client';
 
 import React from 'react';
-import SidebarUser from '@/components/SidebarUser'
+import SidebarAdmin from '@/components/SidebarAdmin'
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar Component - Fixed */}
-      <SidebarUser />
+      <SidebarAdmin />
 
       {/* Main Content Area */}
       <main className="flex-1 transition-all duration-300">

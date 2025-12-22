@@ -1,14 +1,34 @@
 // components/Sidebar.tsx
 'use client';
 
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { signOut } from "next-auth/react";
+import { useCurrentUser } from '@/hooks/auth';
 
-export default function Sidebar() {
+
+export default function SidebarUser() {
   const pathname = usePathname();
   const router = useRouter();
   const [isMinimized, setIsMinimized] = useState(false);
+  // const session = useSession();
+  const user = useCurrentUser();
+  // const [logout, setLogout] = useState(false);
+
+  useEffect(()=>{
+    if(!user){
+    router.push('/');
+    }
+  },[user])
+  // async function Logout () {
+  //   // await signOut();
+  //   router.push('/');
+  // }
+
+  // if(logout){
+  //   console.log(logout);
+  // }
 
   return (
     <>
@@ -106,6 +126,14 @@ export default function Sidebar() {
           <button 
             className={`flex items-center ${isMinimized ? 'justify-center' : 'gap-3'} px-4 py-3 w-full text-red-600 hover:bg-red-50 rounded-lg transition-colors`}
             title="Logout"
+            onClick={() => {
+              // setIsOpen(false);
+              // router.push('/');
+              signOut();
+              // if(!check) console.log(check)
+              // setLogout(true);
+              // Logout();
+            }}
           >
             <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

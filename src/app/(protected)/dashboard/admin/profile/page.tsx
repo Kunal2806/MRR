@@ -209,7 +209,7 @@ export default function StudentProfile() {
     e.preventDefault();
     
     try{
-      const response = await fetch(`/api/userdashboard/profile/${user?.id}`,{
+      const response = await fetch(`/api/userdata/${user?.id}`,{
         method: "PUT",
         headers: {
           "Content-Type" : "application/json"
