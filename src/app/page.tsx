@@ -1,14 +1,12 @@
 import MentorshipHero from '@/components/Hero'
 import Engagement  from '@/components/Engagement'
-import React from 'react'
 import LearningPathPage from '@/components/learningpath/leaningPath'
 import InternshipOpportunities from '@/components/carrer/InternshipOpportunities'
-import Faq from '@/components/Faq'
+import FaqAndContact from '@/components/Faq'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
 const Homepage = () => {
-  const homeInternship = ["5ff1a935-c568-4d80-b7df-39c7fcdf298b", "INT-GWS","INT-MERN"];
   return (
     <div>
       <MentorshipHero/>
@@ -36,10 +34,10 @@ const Homepage = () => {
             Gain hands-on experience with real-world projects and expert mentorship
           </p>
         </div>
-            <InternshipOpportunities isHomePage = {true} homeInternship = {homeInternship}/>
+            <InternshipOpportunities isHomePage = {true}/>
       </div>
       <Engagement/>
-      <Faq/>
+      <FaqAndContact/>
     </div>
   )
 }

@@ -44,6 +44,7 @@ export async function POST(request: NextRequest) {
     // ✅ Insert internship
     await db.insert(JobInternshipTable).values({
       title: body.title,
+      ishome: body.ishome ?? 'no',
       domain: body.domain,
       status: body.status ?? "open",
       mode: body.mode ?? null,

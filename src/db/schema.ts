@@ -167,10 +167,12 @@ export const UserDataTable = pgTable(
 
 
 export const JobStatus = pgEnum("job_status", ["open","close","upcoming"]);
-export const JobLevel = pgEnum("job_level",["beginner","intermediate", "advance"])
+export const JobLevel = pgEnum("job_level",["beginner","intermediate", "advance"]);
+export const IsHome = pgEnum("Is_Home", ['yes', 'no'])
 export const JobInternshipTable = pgTable(
   "job_internship", {
     id: uuid("id").defaultRandom().primaryKey(),
+    ishome: IsHome('Is_Home').default('no'),
     title: text("title"), // NEW
     domain: text("domain"),
     status: JobStatus("status").default("open"),
@@ -212,5 +214,16 @@ export const JobInternshipApplication = pgTable(
     index("job_internship_application_user_id_idx").on(table.userId),
     index("job_internship_application_internship_job_id_idx").on(table.internshipJobId),
     uniqueIndex("job_internship_application_user_job_unique").on(table.userId, table.internshipJobId)
+  ]
+)
+
+export const Faq = pgTable(
+  "faq", {
+    id: uuid('id').defaultRandom().primaryKey(),
+    question: text("question"),
+    answer: text("answer")
+  },
+  (table)=>[
+    index("faq_id_idx").on(table.id)
   ]
 )

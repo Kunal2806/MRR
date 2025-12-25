@@ -22,6 +22,20 @@
       "when": 1766158366770,
       "tag": "0002_huge_steel_serpent",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1766657497397,
+      "tag": "0003_marvelous_phalanx",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1766659484018,
+      "tag": "0004_old_rick_jones",
+      "breakpoints": true
     }
   ]
 }

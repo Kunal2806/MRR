@@ -1,5 +1,5 @@
 import { db } from '@/db';
-import { JobInternshipTable } from '@/db/schema';
+import { IsHome, JobInternshipTable } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -22,6 +22,7 @@ export async function PUT(request: NextRequest) {
 
     const updateData = {
       title: body.title,
+      ishome: body.ishome ?? 'no',
       domain: body.domain,
       status: body.status ?? "open",
       mode: body.mode ?? null,

@@ -5,6 +5,7 @@
 
 export interface Internship {
   id: string;
+  ishome: 'yes' | 'no',
   title: string; // NEW
   domain: string;
   status: string;

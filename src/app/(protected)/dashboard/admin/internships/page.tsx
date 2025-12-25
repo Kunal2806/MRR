@@ -13,6 +13,7 @@ interface Task {
 
 interface Internship {
   id: string;
+  ishome: 'yes' | 'no',
   title: string;
   domain: string;
   status: string;
@@ -35,6 +36,7 @@ interface Internship {
 
 const initialFormState: Internship = {
   id: '',
+  ishome: 'no',
   title: '',
   domain: '',
   status: 'open',
@@ -665,7 +667,7 @@ export default function InternshipAdminPanel() {
 
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Mode
+                        Status
                       </label>
                       <select
                         name="status"
@@ -708,6 +710,21 @@ export default function InternshipAdminPanel() {
                         <option value="beginner">Beginner</option>
                         <option value="intermediate">Intermediate</option>
                         <option value="advanced">Advanced</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        IsHome
+                      </label>
+                      <select
+                        name="ishome"
+                        value={formData.ishome}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 transition-colors"
+                      >
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
                       </select>
                     </div>
 

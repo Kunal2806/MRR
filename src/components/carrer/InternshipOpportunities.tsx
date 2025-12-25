@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { internships } from '@/components/carrer/career';
 import { Calendar, Building2 } from 'lucide-react';
 import Link from 'next/link';
@@ -12,12 +12,12 @@ export type Level = "beginner" | "intermediate" | "advance";
 
 interface HomeInternshipProps {
   isHomePage: boolean;
-  homeInternship?: string[];
+  // homeInternship?: string[];
 }
 
 export default function InternshipOpportunities({ 
   isHomePage, 
-  homeInternship 
+  // homeInternship 
 }: HomeInternshipProps) {
 
 const [internships, setInternships] = useState<Internship[]>([]);
@@ -34,10 +34,10 @@ useEffect(() => {
 }, [])
 
   const filteredInternships = internships.filter(internship => {
-    if (isHomePage && homeInternship) {
-      return homeInternship.includes(internship.id);
+    if (isHomePage && internship.ishome === 'yes') {
+      return true;
     }
-    return true;
+    return false;
   });
 
   // Status badge styling

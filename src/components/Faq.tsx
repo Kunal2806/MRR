@@ -1,15 +1,21 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HelpCircle, MessageSquare, ChevronDown, User, Mail, Phone, Send } from 'lucide-react';
 
 interface FAQItemProps {
   question: string;
+  answer: string;
   isOpen: boolean;
   onClick: () => void;
 }
 
-const FAQItem: React.FC<FAQItemProps> = ({ question, isOpen, onClick }) => {
+interface Faq {
+  question: string;
+  answer: string;
+}
+
+const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onClick }) => {
   return (
     <div className="bg-white border border-gray-200 rounded-lg mb-3 overflow-hidden hover:border-indigo-200 transition-colors">
       <button
@@ -26,7 +32,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, isOpen, onClick }) => {
       </button>
       {isOpen && (
         <div className="px-5 pb-4 text-gray-600 text-sm md:text-base border-t border-gray-100 pt-4">
-          <p>Answer content would go here...</p>
+          <p>{answer}</p>
         </div>
       )}
     </div>
@@ -43,17 +49,7 @@ export default function FAQContactPage() {
     message: '',
   });
 
-  const faqs = [
-    'What is this platform?',
-    'What are the benefits for students?',
-    'What is the USP (Unique Selling Point) of this portal?',
-    'What kind of events are hosted on this platform?',
-    'How do I register for events?',
-    'Are the workshops free?',
-    'What is the mentorship program?',
-    'How can I access internship opportunities?',
-    'What types of internships are available?',
-  ];
+  const [faqs, setFaqs] = useState<Faq[]>([]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -66,6 +62,23 @@ export default function FAQContactPage() {
     console.log('Form submitted:', formData);
     // Handle form submission here
   };
+
+  useEffect(()=>{
+    const fetchFaq = async () => {
+      try{
+        const response = await fetch('/api/faq');
+        if(!response.ok) {
+          console.log("error occured");
+          return;
+        }
+        const data = await response.json();
+        setFaqs(data)
+      } catch(error){
+        console.log(error);
+      }
+    }
+    fetchFaq();
+  },[]);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -88,10 +101,11 @@ export default function FAQContactPage() {
             </p>
 
             <div className="space-y-0">
-              {faqs.map((question, index) => (
+              {faqs.map((faq, index) => (
                 <FAQItem
                   key={index}
-                  question={question}
+                  question={faq.question}
+                  answer={faq.answer}
                   isOpen={openIndex === index}
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 />
