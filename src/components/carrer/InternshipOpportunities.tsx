@@ -34,10 +34,10 @@ useEffect(() => {
 }, [])
 
   const filteredInternships = internships.filter(internship => {
-    if (isHomePage && internship.ishome === 'yes') {
-      return true;
+    if (isHomePage && internship.ishome === 'no') {
+      return false;
     }
-    return false;
+    return true;
   });
 
   // Status badge styling

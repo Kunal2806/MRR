@@ -79,7 +79,7 @@ const engagements: Engagement[] = [
     icon: Heart,
     bgColor: "bg-pink-200",
     hoverBgColor: "hover:bg-pink-300",
-    link: "/placement-support"
+    link: "/placementsupport"
   },
   {
     id: "mentorship",

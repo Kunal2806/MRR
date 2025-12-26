@@ -29,6 +29,7 @@ useEffect(() => {
       // console.log(";result: ", result)
       setInternship({
         id: result.id ?? "",
+        ishome: result.ishome ?? 'no',
         title: result.title ?? "", // NEW
         domain: result.domain ?? "",
         status: result.status ?? "",
@@ -71,7 +72,7 @@ async function handleApply() {
   });
 
   const result = await response.json();
-  console.log(result.message);
+  alert(result.message);
 }
 
   // Handle case where internship is not found
