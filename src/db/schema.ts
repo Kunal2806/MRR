@@ -227,3 +227,20 @@ export const Faq = pgTable(
     index("faq_id_idx").on(table.id)
   ]
 )
+
+
+export const QueryType = pgEnum("query_type", ['Event Query', 'Mentorship Help', 'Internship Support', 'Partnership', 'Other']);
+
+export const Contact = pgTable(
+  "contact", {
+    id: uuid('id').defaultRandom().primaryKey(),
+    fullname: text('fullname'),
+    email: text('email'),
+    number: text('number'),
+    querytype: QueryType('query_type'),
+    message: text('message')
+  },
+  (table)=>[
+    index('contact_id_email_idx').on(table.id, table.email)
+  ]
+)
