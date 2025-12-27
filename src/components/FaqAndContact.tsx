@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { HelpCircle, MessageSquare, ChevronDown, User, Mail, Phone, Send } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 
 interface FAQItemProps {
   question: string;
@@ -42,10 +43,10 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onClick }) 
 export default function FAQContactPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [formData, setFormData] = useState({
-    fullName: '',
+    fullname: '',
     email: '',
-    mobile: '',
-    queryType: '',
+    number: '',
+    querytype: '',
     message: '',
   });
 
@@ -58,9 +59,35 @@ export default function FAQContactPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const {data: session} = useSession();
+  const userId = session?.user.id;
+
+  const postContact = async () => {
+    const response = await fetch('/api/contact/', {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify({
+        ...formData,
+        userId
+      })
+    })
+
+    const result = await response.json();
+    alert(result.message);
+  }
   const handleSubmit = () => {
-    console.log('Form submitted:', formData);
+    // console.log('Form submitted:', formData);
     // Handle form submission here
+    postContact();
+    setFormData({
+      fullname: '',
+      email: '',
+      number: '',
+      querytype: '',
+      message: ''
+    })
   };
 
   useEffect(()=>{
@@ -139,8 +166,8 @@ export default function FAQContactPage() {
                 </label>
                 <input
                   type="text"
-                  name="fullName"
-                  value={formData.fullName}
+                  name="fullname"
+                  value={formData.fullname}
                   onChange={handleInputChange}
                   placeholder="Enter your full name"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm"
@@ -171,8 +198,8 @@ export default function FAQContactPage() {
                 </label>
                 <input
                   type="tel"
-                  name="mobile"
-                  value={formData.mobile}
+                  name="number"
+                  value={formData.number}
                   onChange={handleInputChange}
                   placeholder="+91 98765 43210"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm"
@@ -185,17 +212,17 @@ export default function FAQContactPage() {
                   Type of Query
                 </label>
                 <select
-                  name="queryType"
-                  value={formData.queryType}
+                  name="querytype"
+                  value={formData.querytype}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm appearance-none bg-white"
                 >
                   <option value="">Select query type</option>
-                  <option value="event">Event Query</option>
-                  <option value="mentorship">Mentorship Help</option>
-                  <option value="internship">Internship Support</option>
-                  <option value="partnership">Partnership</option>
-                  <option value="other">Other</option>
+                  <option value="Event Query">Event Query</option>
+                  <option value="Mentorship Help">Mentorship Help</option>
+                  <option value="Internship Support">Internship Support</option>
+                  <option value="Partnership">Partnership</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
 

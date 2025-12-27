@@ -234,6 +234,7 @@ export const QueryType = pgEnum("query_type", ['Event Query', 'Mentorship Help',
 export const Contact = pgTable(
   "contact", {
     id: uuid('id').defaultRandom().primaryKey(),
+    userId: uuid('userid').notNull().references(()=> UsersTable.id, {onDelete: 'cascade'}),
     fullname: text('fullname'),
     email: text('email'),
     number: text('number'),

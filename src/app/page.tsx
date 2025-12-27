@@ -2,7 +2,7 @@ import MentorshipHero from '@/components/Hero'
 import Engagement  from '@/components/Engagement'
 import LearningPathPage from '@/components/learningpath/leaningPath'
 import InternshipOpportunities from '@/components/carrer/InternshipOpportunities'
-import FaqAndContact from '@/components/Faq'
+import FaqAndContact from '@/components/FaqAndContact'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 

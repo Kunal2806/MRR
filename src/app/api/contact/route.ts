@@ -9,12 +9,14 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
     try{
         const data = await request.json();
-        if(!data.fullname || !data.email || !data.number || !data.querytype || !data.message) {
+        console.log(data)
+        if(!data.fullname || !data.email || !data.number || !data.querytype || !data.message || !data.userId) {
             return NextResponse.json({
-                "message": "data is incomplete"
+                message: "data is incomplete"
             });
         }
         await db.insert(Contact).values({
+            userId: data.userId,
             fullname: data.fullname,
             email: data.email,
             number: data.number,
@@ -22,11 +24,10 @@ export async function POST(request: NextRequest) {
             message: data.message
         })
         return NextResponse.json({
-            "message": "thanks to contact"
+            message: "thanks to contact"
         })
     }catch(error) {
         console.error(error);
-        return NextResponse.json({"message": "cannot contact"})
+        return NextResponse.json({message: "cannot contact"})
     }
-    
 }
