@@ -230,11 +230,12 @@ export const Faq = pgTable(
 
 
 export const QueryType = pgEnum("query_type", ['Event Query', 'Mentorship Help', 'Internship Support', 'Partnership', 'Other']);
-
+export const ContactStatus = pgEnum('status', ['new', 'read', 'resolved']);
 export const Contact = pgTable(
   "contact", {
     id: uuid('id').defaultRandom().primaryKey(),
     userId: uuid('userid').notNull().references(()=> UsersTable.id, {onDelete: 'cascade'}),
+    status: ContactStatus('status').default('new'),
     fullname: text('fullname'),
     email: text('email'),
     number: text('number'),

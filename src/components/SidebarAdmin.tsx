@@ -105,20 +105,26 @@ export default function SidebarAdmin() {
             {!isMinimized && <span>Internships</span>}
           </Link>
 
-          <Link 
-            href="/dashboard/admin/faq" 
-            className={`flex items-center ${isMinimized ? 'justify-center' : 'gap-3'} px-4 py-3 rounded-lg transition-colors ${
-              pathname === '/dashboard/admin/faq' 
-                ? 'bg-indigo-50 text-indigo-600' 
-                : 'text-gray-700 hover:bg-gray-50'
-            }`}
-            title="FAQ"
-          >
-            <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            {!isMinimized && <span>FAQ</span>}
-          </Link>
+           <Link 
+              href="/dashboard/admin/contact" 
+              className={`flex items-center ${isMinimized ? 'justify-center' : 'gap-3'} px-4 py-3 rounded-lg transition-colors ${
+                pathname === '/dashboard/admin/contact' 
+                  ? 'bg-indigo-50 text-indigo-600' 
+                  : 'text-gray-700 hover:bg-gray-50'
+              }`}
+              title="Contact"
+            >
+              <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 8h18V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" 
+                />
+              </svg>
+              {!isMinimized && <span>Contact</span>}
+            </Link>
+
 
           <Link 
             href="/dashboard/admin/profile" 
