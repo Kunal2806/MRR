@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Internship } from '@/components/carrer/Internship';
 import { useSession } from 'next-auth/react';
+import { Application } from 'twilio/lib/twiml/VoiceResponse';
 
 export default function JobPosting() {
   const { data: session } = useSession();
@@ -13,6 +14,7 @@ export default function JobPosting() {
   const params = useParams();
   const internshipId = params.content as string;
   const [internship, setInternship] = useState<Internship>();
+  const [application, setApplication] = useState(false);
   // Find the specific internship
   // const internship = internships.find(internship => internship.id === internshipId);
 useEffect(() => {
@@ -58,10 +60,22 @@ useEffect(() => {
   if (internshipId) {
     fetchData();
   }
-}, [internshipId]);
+
+  const applicationDetail = async() => {
+    const response = await fetch(`/api/jobapplication?userId=${userId}&internshipId=${internshipId}`)
+    if(!response.ok){
+        console.error('Failed to fetch internship');
+        return;
+    }
+    const result = await response.json();
+    setApplication(result.Application)
+  }
+  if (internshipId && userId) {
+    applicationDetail();
+  }
+}, [internshipId, userId]);
 
 async function handleApply() {
-
   // console.log("applying");
   const response = await fetch("/api/jobapplication",{
     method: "POST",
@@ -73,6 +87,7 @@ async function handleApply() {
 
   const result = await response.json();
   alert(result.message);
+  setApplication(true);
 }
 
   // Handle case where internship is not found
@@ -363,9 +378,14 @@ async function handleApply() {
               disabled={internship.status === 'close'}
               onClick={()=>handleApply()}
             >
-              {internship.status === 'close' ? 'Applications Closed' : 
-               internship.status === 'upcoming' ? 'Opening Soon' : 
-               'Apply Now'}
+              {
+                !application ?
+                internship.status === 'close' ? 'Applications Closed' : 
+                internship.status === 'upcoming' ? 'Opening Soon' : 
+                'Apply Now'
+                :
+                "Already Applied"
+              }
             </button>
           </div>
         </div>

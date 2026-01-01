@@ -5,6 +5,33 @@ import { and, eq } from "drizzle-orm";
 // import { useSession } from "next-auth/react";
 import { NextRequest, NextResponse } from "next/server";
 
+export async function GET(request: NextRequest){
+    // const data = await request.json();
+    const { searchParams } = new URL(request.url);
+    const userId = searchParams.get('userId');
+    const internshipId = searchParams.get('internshipId');
+
+    if(!userId || !internshipId){
+        return NextResponse.json({
+            Application: false
+        })
+    }
+    const Application = await db.query.JobInternshipApplication.findFirst({
+        where: and(
+            eq(JobInternshipApplication.internshipJobId, internshipId),
+            eq(JobInternshipApplication.userId, userId)
+        )
+    })
+    if(!Application){
+        return NextResponse.json({
+            Application: false
+        })
+    }
+    return NextResponse.json({
+            Application: true
+        })
+}
+
 export async function POST(request: NextRequest) {
     try{
         
